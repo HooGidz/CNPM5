@@ -78,6 +78,7 @@ namespace CNPM5.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            ViewData["RoleId"] = new SelectList(_context.TblRoles, "RoleId", "RoleName", tblAccount.RoleId);
             return View(tblAccount);
         }
 
@@ -113,6 +114,7 @@ namespace CNPM5.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["RoleId"] = new SelectList(_context.TblRoles, "RoleId", "RoleName", tblAccount.RoleId);
             return View(tblAccount);
         }
 
