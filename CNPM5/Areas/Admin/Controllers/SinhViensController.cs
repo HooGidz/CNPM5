@@ -10,88 +10,86 @@ using CNPM5.Models;
 namespace CNPM5.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AccountsController : Controller
+    public class SinhViensController : Controller
     {
         private readonly Cnpm5Context _context;
 
-        public AccountsController(Cnpm5Context context)
+        public SinhViensController(Cnpm5Context context)
         {
             _context = context;
         }
 
-        // GET: Admin/Accounts
+        // GET: Admin/SinhViens
         public async Task<IActionResult> Index()
         {
-            
-            return View(await _context.TblAccounts.ToListAsync());
+            return View(await _context.TblSinhViens.ToListAsync());
         }
 
-        // GET: Admin/Accounts/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: Admin/SinhViens/Details/5
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tblAccount = await _context.TblAccounts
-                .FirstOrDefaultAsync(m => m.AccountId == id);
-            if (tblAccount == null)
+            var tblSinhVien = await _context.TblSinhViens
+                .FirstOrDefaultAsync(m => m.MaSV == id);
+            if (tblSinhVien == null)
             {
                 return NotFound();
             }
 
-            return View(tblAccount);
+            return View(tblSinhVien);
         }
 
-        // GET: Admin/Accounts/Create
+        // GET: Admin/SinhViens/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Accounts/Create
+        // POST: Admin/SinhViens/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AccountId,Username,Password,FullName,Phone,Email,RoleId,LastLogin,CreatedDate,Status")] TblAccount tblAccount)
+        public async Task<IActionResult> Create([Bind("MaSV,HoTen,GioiTinh,NgaySinh,Khoa,Lop,SDT,Email,DiaChi,TrangThai")] TblSinhVien tblSinhVien)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tblAccount);
+                
+                _context.Add(tblSinhVien);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            
-            return View(tblAccount);
+            return View(tblSinhVien);
         }
 
-        // GET: Admin/Accounts/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Admin/SinhViens/Edit/5
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tblAccount = await _context.TblAccounts.FindAsync(id);
-            if (tblAccount == null)
+            var tblSinhVien = await _context.TblSinhViens.FindAsync(id);
+            if (tblSinhVien == null)
             {
                 return NotFound();
             }
-            ViewData["RoleId"] = new SelectList(_context.TblRoles, "RoleId", "RoleName", tblAccount.RoleId);
-            return View(tblAccount);
+            return View(tblSinhVien);
         }
 
-        // POST: Admin/Accounts/Edit/5
+        // POST: Admin/SinhViens/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AccountId,Username,Password,FullName,Phone,Email,RoleId,LastLogin,CreatedDate,Status")] TblAccount tblAccount)
+        public async Task<IActionResult> Edit(string id, [Bind("MaSV,HoTen,GioiTinh,NgaySinh,Khoa,Lop,SDT,Email,DiaChi,TrangThai")] TblSinhVien tblSinhVien)
         {
-            if (id != tblAccount.AccountId)
+            if (id != tblSinhVien.MaSV)
             {
                 return NotFound();
             }
@@ -100,12 +98,12 @@ namespace CNPM5.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(tblAccount);
+                    _context.Update(tblSinhVien);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TblAccountExists(tblAccount.AccountId))
+                    if (!TblSinhVienExists(tblSinhVien.MaSV))
                     {
                         return NotFound();
                     }
@@ -116,46 +114,45 @@ namespace CNPM5.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoleId"] = new SelectList(_context.TblRoles, "RoleId", "RoleName", tblAccount.RoleId);
-            return View(tblAccount);
+            return View(tblSinhVien);
         }
 
-        // GET: Admin/Accounts/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: Admin/SinhViens/Delete/5
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tblAccount = await _context.TblAccounts
-                .FirstOrDefaultAsync(m => m.AccountId == id);
-            if (tblAccount == null)
+            var tblSinhVien = await _context.TblSinhViens
+                .FirstOrDefaultAsync(m => m.MaSV == id);
+            if (tblSinhVien == null)
             {
                 return NotFound();
             }
 
-            return View(tblAccount);
+            return View(tblSinhVien);
         }
 
-        // POST: Admin/Accounts/Delete/5
+        // POST: Admin/SinhViens/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var tblAccount = await _context.TblAccounts.FindAsync(id);
-            if (tblAccount != null)
+            var tblSinhVien = await _context.TblSinhViens.FindAsync(id);
+            if (tblSinhVien != null)
             {
-                _context.TblAccounts.Remove(tblAccount);
+                _context.TblSinhViens.Remove(tblSinhVien);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TblAccountExists(int id)
+        private bool TblSinhVienExists(string id)
         {
-            return _context.TblAccounts.Any(e => e.AccountId == id);
+            return _context.TblSinhViens.Any(e => e.MaSV == id);
         }
     }
 }

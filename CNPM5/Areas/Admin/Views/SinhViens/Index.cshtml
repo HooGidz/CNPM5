@@ -1,0 +1,81 @@
+﻿@model IEnumerable<CNPM5.Models.TblSinhVien>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Quản lý sinh viên</h1>
+
+<p>
+    <a asp-action="Create">
+        <button type="button" class="btn btn-primary">
+            <span class="tf-icons bx bx-plus"></span>&nbsp; Thêm sinh viên
+        </button>
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Họ và tên</th>
+            <th>Giới tính</th>
+            <th>Ngày Sinh</th>
+            <th>Khoa</th>
+            <th>Lớp</th>
+            <th>Số điện thoại</th>
+            <th>Email</th>
+            <th>Địa chỉ</th>
+            <th>Trạng thái</th>
+        </tr>
+    </thead>
+    <tbody class="table-border-bottom-0">
+        @{
+            int i = 1;
+        }
+        @foreach (var item in Model) {
+                <tr>
+                <td>@(i++)</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HoTen)
+                    </td>
+                    <td>
+                        <span class="badge bg-label-primary me-1">@Html.DisplayFor(modelItem => item.GioiTinh)</span
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgaySinh)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Khoa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Lop)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SDT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DiaChi)
+                    </td>
+                    <td>
+                        <span class="badge bg-label-primary me-1">@Html.DisplayFor(modelItem => item.TrangThai)</span
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.MaSV"><i class="bx bx-edit-alt me-1"></i> Sửa</a>
+                                <a class="dropdown-item" asp-action="Details" asp-route-id="@item.MaSV"><i class="bx bx-edit-alt me-1"></i> Chi tiết</a>
+                                <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.MaSV"><i class="bx bx-trash me-1"></i> Xoá</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+        }
+            </tbody>
+</table>

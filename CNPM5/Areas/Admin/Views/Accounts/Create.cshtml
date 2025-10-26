@@ -5,59 +5,75 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Thêm tài khoản</h1>
 
 <h4>TblAccount</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 card-body">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
+                <div class="mb-3 row">
+                    <label asp-for="Username" for="html5-text-input" class="col-md-2 col-form-label">Tên tài khoản</label>
+                    <div class="col-md-10">
+                        <input asp-for="Username" class="form-control" type="text" id="html5-text-input">
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <div class="mb-3 row">
+                    <label asp-for="Password" for="html5-text-input" class="col-md-2 col-form-label">Mật khẩu</label>
+                    <div class="col-md-10">
+                        <input asp-for="Password" class="form-control" type="text" id="html5-text-input">
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <label asp-for="FullName" class="control-label"></label>
-                <input asp-for="FullName" class="form-control" />
-                <span asp-validation-for="FullName" class="text-danger"></span>
+                <div class="mb-3 row">
+                    <label asp-for="FullName" for="html5-text-input" class="col-md-2 col-form-label">Họ và tên</label>
+                    <div class="col-md-10">
+                        <input asp-for="FullName" class="form-control" type="text" id="html5-text-input">
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
+                <div class="mb-3 row">
+                    <label asp-for="Phone" for="html5-text-input" class="col-md-2 col-form-label">Số điện thoại</label>
+                    <div class="col-md-10">
+                        <input asp-for="Phone" class="form-control" type="text" id="html5-text-input">
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <div class="mb-3 row">
+                    <label asp-for="Email" for="html5-text-input" class="col-md-2 col-form-label">Email</label>
+                    <div class="col-md-10">
+                        <input asp-for="Email" class="form-control" type="text" id="html5-text-input">
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <label asp-for="LastLogin" class="control-label"></label>
-                <input asp-for="LastLogin" class="form-control" />
-                <span asp-validation-for="LastLogin" class="text-danger"></span>
+                <div class="mb-3 row">
+                    <label asp-for="Status" for="html5-text-input" class="col-md-2 col-form-label">Trạng thái</label>
+                    <div class="col-md-10">
+                        <input asp-for="Status" class="form-control" type="text" id="html5-text-input">
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Thêm" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" style="margin-left: 10px;">
+        <button type="button" class="btn btn-dark">Quay lại</button>
+    </a>
 </div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
