@@ -22,6 +22,7 @@ namespace CNPM5.Areas.Admin.Controllers
         // GET: Admin/Accounts
         public async Task<IActionResult> Index()
         {
+            
             return View(await _context.TblAccounts.ToListAsync());
         }
 
@@ -64,6 +65,7 @@ namespace CNPM5.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
             }
+            
             return View(tblAccount);
         }
 

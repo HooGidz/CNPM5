@@ -25,19 +25,21 @@ public partial class Cnpm5Context : DbContext
 
     public virtual DbSet<TblRoom> TblRooms { get; set; }
 
+    public virtual DbSet<TblStudent> TblStudents { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-L7HK7RE;Initial Catalog=CNPM5;Integrated Security=True;TrustServerCertificate=True;");
+        => optionsBuilder.UseSqlServer("data source= DESKTOP-L7HK7RE;initial catalog=CNPM5;integrated security=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<TblAccount>(entity =>
         {
-            entity.HasKey(e => e.AccountId).HasName("PK__tblAccou__349DA5A6AB334ADF");
+            entity.HasKey(e => e.AccountId).HasName("PK__tblAccou__349DA5A6FE950CE2");
 
             entity.ToTable("tblAccount");
 
-            entity.HasIndex(e => e.Username, "UQ__tblAccou__536C85E4CCE54131").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__tblAccou__536C85E494A42A67").IsUnique();
 
             entity.Property(e => e.CreatedDate)
                 .HasDefaultValueSql("(getdate())")
@@ -80,7 +82,7 @@ public partial class Cnpm5Context : DbContext
 
         modelBuilder.Entity<TblRole>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__tblRole__8AFACE1A85DA442B");
+            entity.HasKey(e => e.RoleId).HasName("PK__tblRole__8AFACE1A38872D91");
 
             entity.ToTable("tblRole");
 
