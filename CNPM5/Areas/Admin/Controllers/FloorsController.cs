@@ -10,22 +10,23 @@ using CNPM5.Models;
 namespace CNPM5.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AccountsController : Controller
+    public class FloorsController : Controller
     {
         private readonly Cnpm5Context _context;
 
-        public AccountsController(Cnpm5Context context)
+        public FloorsController(Cnpm5Context context)
         {
             _context = context;
         }
 
-        // GET: Admin/Accounts
+        // GET: Admin/Floors
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TblAccounts.ToListAsync());
+            var cnpm5Context = _context.TblFloors.Include(t => t.Building);
+            return View(await cnpm5Context.ToListAsync());
         }
 
-        // GET: Admin/Accounts/Details/5
+        // GET: Admin/Floors/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,41 +34,42 @@ namespace CNPM5.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var tblAccount = await _context.TblAccounts
-                .FirstOrDefaultAsync(m => m.AccountId == id);
-            if (tblAccount == null)
+            var tblFloor = await _context.TblFloors
+                .Include(t => t.Building)
+                .FirstOrDefaultAsync(m => m.FloorId == id);
+            if (tblFloor == null)
             {
                 return NotFound();
             }
 
-            return View(tblAccount);
+            return View(tblFloor);
         }
 
-        // GET: Admin/Accounts/Create
+        // GET: Admin/Floors/Create
         public IActionResult Create()
         {
-            ViewData["RoleId"] = new SelectList(_context.TblRoles, "RoleId", "RoleName");
+            ViewData["BuildingId"] = new SelectList(_context.TblBuildings, "BuildingId", "Name");
             return View();
         }
 
-        // POST: Admin/Accounts/Create
+        // POST: Admin/Floors/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AccountId,Username,Password,FullName,Phone,Email,RoleId,LastLogin,CreatedDate,Status")] TblAccount tblAccount)
+        public async Task<IActionResult> Create([Bind("FloorId,BuildingId,FloorNumber")] TblFloor tblFloor)
         {
-          
             if (ModelState.IsValid)
             {
-            _context.Add(tblAccount);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+                _context.Add(tblFloor);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            return View(tblAccount);
+            ViewData["BuildingId"] = new SelectList(_context.TblBuildings, "BuildingId", "Name", tblFloor.BuildingId);
+            return View(tblFloor);
         }
 
-        // GET: Admin/Accounts/Edit/5
+        // GET: Admin/Floors/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,23 +77,23 @@ namespace CNPM5.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var tblAccount = await _context.TblAccounts.FindAsync(id);
-            if (tblAccount == null)
+            var tblFloor = await _context.TblFloors.FindAsync(id);
+            if (tblFloor == null)
             {
                 return NotFound();
             }
-            ViewData["RoleId"] = new SelectList(_context.TblRoles, "RoleId", "RoleName", tblAccount.RoleId);
-            return View(tblAccount);
+            ViewData["BuildingId"] = new SelectList(_context.TblBuildings, "BuildingId", "Name", tblFloor.BuildingId);
+            return View(tblFloor);
         }
 
-        // POST: Admin/Accounts/Edit/5
+        // POST: Admin/Floors/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AccountId,Username,Password,FullName,Phone,Email,RoleId,LastLogin,CreatedDate,Status")] TblAccount tblAccount)
+        public async Task<IActionResult> Edit(int id, [Bind("FloorId,BuildingId,FloorNumber")] TblFloor tblFloor)
         {
-            if (id != tblAccount.AccountId)
+            if (id != tblFloor.FloorId)
             {
                 return NotFound();
             }
@@ -100,12 +102,12 @@ namespace CNPM5.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(tblAccount);
+                    _context.Update(tblFloor);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TblAccountExists(tblAccount.AccountId))
+                    if (!TblFloorExists(tblFloor.FloorId))
                     {
                         return NotFound();
                     }
@@ -116,11 +118,11 @@ namespace CNPM5.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoleId"] = new SelectList(_context.TblRoles, "RoleId", "RoleName", tblAccount.RoleId);
-            return View(tblAccount);
+            ViewData["BuildingId"] = new SelectList(_context.TblBuildings, "BuildingId", "Name", tblFloor.BuildingId);
+            return View(tblFloor);
         }
 
-        // GET: Admin/Accounts/Delete/5
+        // GET: Admin/Floors/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -128,34 +130,35 @@ namespace CNPM5.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var tblAccount = await _context.TblAccounts
-                .FirstOrDefaultAsync(m => m.AccountId == id);
-            if (tblAccount == null)
+            var tblFloor = await _context.TblFloors
+                .Include(t => t.Building)
+                .FirstOrDefaultAsync(m => m.FloorId == id);
+            if (tblFloor == null)
             {
                 return NotFound();
             }
 
-            return View(tblAccount);
+            return View(tblFloor);
         }
 
-        // POST: Admin/Accounts/Delete/5
+        // POST: Admin/Floors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tblAccount = await _context.TblAccounts.FindAsync(id);
-            if (tblAccount != null)
+            var tblFloor = await _context.TblFloors.FindAsync(id);
+            if (tblFloor != null)
             {
-                _context.TblAccounts.Remove(tblAccount);
+                _context.TblFloors.Remove(tblFloor);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TblAccountExists(int id)
+        private bool TblFloorExists(int id)
         {
-            return _context.TblAccounts.Any(e => e.AccountId == id);
+            return _context.TblFloors.Any(e => e.FloorId == id);
         }
     }
 }
