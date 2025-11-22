@@ -7,7 +7,6 @@
 
 <h1>Thêm sinh viên</h1>
 
-<h4>TblStudent</h4>
 <hr />
 <div class="row">
     <div class="col-md-4 card-body">
@@ -87,6 +86,16 @@
                     <label asp-for="EmergencyContactPhone" class="control-label">Sđt người liên hệ</label>
                     <input asp-for="EmergencyContactPhone" class="form-control" />
                     <span asp-validation-for="EmergencyContactPhone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                <label asp-for="CreatedAt" class="control-label">Ngày đăng ký</label>
+                <input asp-for="CreatedAt" class="form-control" />
+                <span asp-validation-for="CreatedAt" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                <label asp-for="UpdatedAt" class="control-label">Cập nhật</label>
+                <input asp-for="UpdatedAt" class="form-control" />
+                <span asp-validation-for="UpdatedAt" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="AccountId" class="control-label">Mã ID</label>
