@@ -27,7 +27,5 @@ public partial class TblAccount
 
     
 
-    public virtual ICollection<TblRegulation> TblRegulations { get; set; } = new List<TblRegulation>();
-
     public virtual ICollection<TblStudent> TblStudents { get; set; } = new List<TblStudent>();
 }

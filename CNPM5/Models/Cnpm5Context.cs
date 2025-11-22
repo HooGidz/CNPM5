@@ -19,8 +19,6 @@ public partial class Cnpm5Context : DbContext
 
     public virtual DbSet<TblAccount> TblAccounts { get; set; }
 
-    public virtual DbSet<TblRegulation> TblRegulations { get; set; }
-
     public virtual DbSet<TblRole> TblRoles { get; set; }
 
     public virtual DbSet<TblStudent> TblStudents { get; set; }
@@ -73,34 +71,7 @@ public partial class Cnpm5Context : DbContext
             entity.Property(e => e.Username).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<TblRegulation>(entity =>
-        {
-            entity.HasKey(e => e.RegulationId).HasName("PK__tblRegul__A192C7E933A07B58");
-
-            entity.ToTable("tblRegulations");
-
-            entity.HasIndex(e => e.RegulationCode, "UQ__tblRegul__26C51AA7A4CE0BC8").IsUnique();
-
-            entity.Property(e => e.Category).HasMaxLength(100);
-            entity.Property(e => e.CreatedDate)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-            entity.Property(e => e.Description).HasMaxLength(1000);
-            entity.Property(e => e.EffectiveDate).HasDefaultValueSql("(getdate())");
-            entity.Property(e => e.FineAmount)
-                .HasDefaultValue(0m)
-                .HasColumnType("decimal(12, 2)");
-            entity.Property(e => e.PenaltyPoints).HasDefaultValue(0);
-            entity.Property(e => e.RegulationCode).HasMaxLength(20);
-            entity.Property(e => e.Status)
-                .HasMaxLength(20)
-                .HasDefaultValue("Active");
-            entity.Property(e => e.Title).HasMaxLength(200);
-
-            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.TblRegulations)
-                .HasForeignKey(d => d.CreatedBy)
-                .HasConstraintName("FK__tblRegula__Creat__151B244E");
-        });
+        
 
         modelBuilder.Entity<TblRole>(entity =>
         {

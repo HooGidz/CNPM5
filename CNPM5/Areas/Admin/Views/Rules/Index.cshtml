@@ -30,42 +30,45 @@
         @{
             int i = 1;
         }
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RuleName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Penalty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EffectiveDate)
-            </td>
-            <td>
-                <span class="badge bg-label-primary me-1">@Html.DisplayFor(modelItem => item.Status)</span>
-            </td>
-            <td>
-                    @Html.DisplayFor(modelItem => item.CreatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-                <td>
-                    <div class="dropdown">
-                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                            <i class="bx bx-dots-vertical-rounded"></i>
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.RuleId"><i class="bx bx-edit-alt me-1"></i> Sửa</a>
-                            <a class="dropdown-item" asp-action="Details" asp-route-id="@item.RuleId"><i class="bx bx-edit-alt me-1"></i> Chi tiết</a>
-                            <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.RuleId"><i class="bx bx-trash me-1"></i> Xoá</a>
+        @if (Model != null){
+            @foreach(var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RuleName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Penalty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EffectiveDate)
+                    </td>
+                    <td>
+                        <span class="badge bg-label-primary me-1">@Html.DisplayFor(modelItem => item.Status)</span>
+                    </td>
+                    <td>
+                        @(item.Account?.FullName ?? "Không rõ người tạo")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.RuleId"><i class="bx bx-edit-alt me-1"></i> Sửa</a>
+                                <a class="dropdown-item" asp-action="Details" asp-route-id="@item.RuleId"><i class="bx bx-edit-alt me-1"></i> Chi tiết</a>
+                                <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.RuleId"><i class="bx bx-trash me-1"></i> Xoá</a>
+                            </div>
                         </div>
-                    </div>
-                </td>
-        </tr>
-}
+                    </td>
+                </tr>
+            }
+        }
+    
     </tbody>
 </table>

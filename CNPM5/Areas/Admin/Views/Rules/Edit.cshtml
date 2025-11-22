@@ -9,7 +9,7 @@
 
 <div class="row">
     <div class="col-md-4 card-body">
-        <form asp-action="Edit">
+        <form asp-action="Edit" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="RuleId" />
             <div class="form-group">
@@ -38,9 +38,11 @@
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreatedBy" class="control-label">Người tạo</label>
-                <input asp-for="CreatedBy" class="form-control" />
-                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+                <label asp-for="AccountId">Người tạo</label>
+                <select asp-for="AccountId" asp-items="@(ViewData["AccountId"] as SelectList)" class="form-control">
+                    <option value="">--- Chọn người tạo ---</option>
+                </select>
+                <span asp-validation-for="AccountId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CreatedDate" class="control-label">Ngày tạo</label>

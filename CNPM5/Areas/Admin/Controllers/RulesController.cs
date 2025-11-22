@@ -22,7 +22,7 @@ namespace CNPM5.Areas.Admin.Controllers
         
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Rules.ToListAsync());
+            return View(await _context.Rules.Include(r => r.Account).ToListAsync());
         }
 
         
@@ -33,7 +33,7 @@ namespace CNPM5.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var rule = await _context.Rules
+            var rule = await _context.Rules.Include(r => r.Account)
                 .FirstOrDefaultAsync(m => m.RuleId == id);
             if (rule == null)
             {
@@ -46,22 +46,24 @@ namespace CNPM5.Areas.Admin.Controllers
         
         public IActionResult Create()
         {
-            return View();
+            ViewData["AccountId"] = new SelectList(_context.TblAccounts.OrderBy(s => s.FullName).ToList(), "AccountId", "FullName");
+            return View(new Rule());
         }
 
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RuleId,RuleName,Description,Penalty,EffectiveDate,Status,CreateBy,CreateDate")] Rule rule)
+        public async Task<IActionResult> Create([Bind("RuleId,RuleName,Description,Penalty,EffectiveDate,Status,AccountId,CreateDate")] Rule rule)
         {
             if (ModelState.IsValid)
             {
-   
-                _context.Add(rule);
+               ViewData["AccountId"] = new SelectList(_context.TblAccounts.OrderBy(s => s.FullName).ToList(), "AccountId", "FullName", rule.AccountId);
+               return View(rule);
+                
+            }
+            _context.Add(rule);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            return View(rule);
         }
 
         
@@ -77,6 +79,7 @@ namespace CNPM5.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            ViewData["AccountId"] = new SelectList(_context.TblAccounts.OrderBy(s => s.FullName).ToList(), "AccountId", "FullName", rule.AccountId);
             return View(rule);
         }
 
@@ -85,7 +88,7 @@ namespace CNPM5.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RuleId,RuleName,Description,Penalty,EffectiveDate,Status,CreatedBy,CreatedDate")] Rule rule)
+        public async Task<IActionResult> Edit(int id, [Bind("RuleId,RuleName,Description,Penalty,EffectiveDate,Status,AccountId,CreatedDate")] Rule rule)
         {
             if (id != rule.RuleId)
             {
@@ -94,6 +97,8 @@ namespace CNPM5.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
+                ViewData["AccountId"] = new SelectList(_context.TblAccounts.OrderBy(s => s.FullName).ToList(), "AccountId", "FullName", rule.AccountId);
+            }
                 try
                 {
                     _context.Update(rule);
@@ -111,8 +116,8 @@ namespace CNPM5.Areas.Admin.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
-            return View(rule);
+        
+            //return View(rule);
         }
 
         // GET: Admin/Rules/Delete/5
