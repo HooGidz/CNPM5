@@ -1,7 +1,11 @@
 using CNPM5.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
+var cultureInfo = new CultureInfo("en-US");
+cultureInfo.DateTimeFormat.ShortDatePattern = "yyyy-MM-dd";
+cultureInfo.DateTimeFormat.LongDatePattern = "yyyy-MM-dd HH:mm:ss";
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

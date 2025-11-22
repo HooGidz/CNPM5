@@ -1,0 +1,56 @@
+﻿@model CNPM5.Models.Rule
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Xóa nội quy</h1>
+
+<h3>Bạn có chắc chắn xóa nội quy này không?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <div class="form-group">
+            <label asp-for="RuleName" class="control-label">Tên nội quy</label>
+            <input asp-for="RuleName" class="form-control" />
+            <span asp-validation-for="RuleName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="control-label">Mô tả nội quy</label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Penalty" class="control-label">Mức phạt</label>
+            <input asp-for="Penalty" class="form-control" />
+            <span asp-validation-for="Penalty" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="EffectiveDate" class="control-label">Ngày hiệu lực</label>
+            <input asp-for="EffectiveDate" class="form-control" />
+            <span asp-validation-for="EffectiveDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Status" class="control-label">Trạng thái</label>
+            <input asp-for="Status" class="form-control" />
+            <span asp-validation-for="Status" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreatedBy" class="control-label">Người tạo</label>
+            <input asp-for="CreatedBy" class="form-control" />
+            <span asp-validation-for="CreatedBy" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreatedDate" class="control-label">Ngày tạo</label>
+            <input asp-for="CreatedDate" class="form-control" />
+            <span asp-validation-for="CreatedDate" class="text-danger"></span>
+        </div>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="RuleId" />
+        <input type="submit" value="Xóa" class="btn btn-danger" /> |
+        <a asp-action="Index">Quay lại</a>
+    </form>
+</div>

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<CNPM5.Models.Violation>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Quản lý vi phạm</h1>
+
+<p>
+    <a asp-action="Create">
+        <button type="button" class="btn btn-primary">
+            <span class="tf-icons bx bx-plus"></span>&nbsp; Thêm mới
+        </button>
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ngày vi phạm</th>
+            <th>Ghi chú</th>
+            <th>Nội quy</th>
+            <th>Sinh viên</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td> @Html.DisplayFor(modelItem => item.ViolationDate)</td>
+                <td>@item.Note</td>
+                
+                <td>@item.Rule.RuleName</td>
+                <td>@item.Student.FullName (@item.Student.StudentCode)</td>
+
+                <td>
+                    <div class="dropdown">
+                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                            <i class="bx bx-dots-vertical-rounded"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.ViolationId"><i class="bx bx-edit-alt me-1"></i> Sửa</a>
+                            <a class="dropdown-item" asp-action="Details" asp-route-id="@item.ViolationId"><i class="bx bx-edit-alt me-1"></i> Chi tiết</a>
+                            <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.ViolationId"><i class="bx bx-trash me-1"></i> Xoá</a>
+                        </div>
+                    </div>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

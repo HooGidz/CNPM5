@@ -45,5 +45,5 @@ public partial class TblStudent
 
     public virtual TblAccount? Account { get; set; }
 
-    public virtual ICollection<TblViolation> TblViolations { get; set; } = new List<TblViolation>();
+    public virtual ICollection<Violation> Violations { get; set; } = new List<Violation>();
 }
