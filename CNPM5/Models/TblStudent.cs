@@ -31,7 +31,7 @@ public partial class TblStudent
 
     public string? AvatarUrl { get; set; }
 
-    public string StudentStatus { get; set; } = null!;
+    public string? StudentStatus { get; set; }
 
     public string? EmergencyContactName { get; set; }
 
@@ -44,4 +44,6 @@ public partial class TblStudent
     public int? AccountId { get; set; }
 
     public virtual TblAccount? Account { get; set; }
+
+    public virtual ICollection<TblViolation> TblViolations { get; set; } = new List<TblViolation>();
 }

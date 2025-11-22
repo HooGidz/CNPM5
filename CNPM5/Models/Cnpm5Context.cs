@@ -25,21 +25,29 @@ public partial class Cnpm5Context : DbContext
 
     public virtual DbSet<TblRoom> TblRooms { get; set; }
 
+    public virtual DbSet<TblRule> TblRules { get; set; }
+
+    public virtual DbSet<TblService> TblServices { get; set; }
+
+    public virtual DbSet<TblServiceUsage> TblServiceUsages { get; set; }
+
     public virtual DbSet<TblStudent> TblStudents { get; set; }
+
+    public virtual DbSet<TblViolation> TblViolations { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("data source= DESKTOP-L7HK7RE;initial catalog=CNPM5;integrated security=True;TrustServerCertificate=True;");
+        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-L7HK7RE;Initial Catalog=CNPM5;Integrated Security=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<TblAccount>(entity =>
         {
-            entity.HasKey(e => e.AccountId).HasName("PK__tblAccou__349DA5A6FE950CE2");
+            entity.HasKey(e => e.AccountId).HasName("PK__tblAccou__349DA5A6AB334ADF");
 
             entity.ToTable("tblAccount");
 
-            entity.HasIndex(e => e.Username, "UQ__tblAccou__536C85E494A42A67").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__tblAccou__536C85E4CCE54131").IsUnique();
 
             entity.Property(e => e.CreatedDate)
                 .HasDefaultValueSql("(getdate())")
@@ -82,7 +90,7 @@ public partial class Cnpm5Context : DbContext
 
         modelBuilder.Entity<TblRole>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__tblRole__8AFACE1A38872D91");
+            entity.HasKey(e => e.RoleId).HasName("PK__tblRole__8AFACE1A85DA442B");
 
             entity.ToTable("tblRole");
 
@@ -110,6 +118,111 @@ public partial class Cnpm5Context : DbContext
                 .HasForeignKey(d => d.FloorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Rooms__FloorId__60A75C0F");
+        });
+
+        modelBuilder.Entity<TblRule>(entity =>
+        {
+            entity.HasKey(e => e.RuleId).HasName("PK__tblRules__110458E2B8CA32B5");
+
+            entity.ToTable("tblRules");
+
+            entity.Property(e => e.CreatedBy).HasMaxLength(100);
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(255);
+            entity.Property(e => e.Penalty).HasMaxLength(100);
+            entity.Property(e => e.RuleName).HasMaxLength(100);
+            entity.Property(e => e.Status).HasMaxLength(20);
+        });
+
+        modelBuilder.Entity<TblService>(entity =>
+        {
+            entity.HasKey(e => e.ServiceId).HasName("PK__tblServi__BD1A23BC336A9BEA");
+
+            entity.ToTable("tblServices");
+
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(sysutcdatetime())");
+            entity.Property(e => e.Name).HasMaxLength(100);
+            entity.Property(e => e.Price).HasColumnType("decimal(12, 2)");
+            entity.Property(e => e.Unit).HasMaxLength(20);
+        });
+
+        modelBuilder.Entity<TblServiceUsage>(entity =>
+        {
+            entity.HasKey(e => e.ServiceUsageId).HasName("PK__tblServi__650316FD6D6B662D");
+
+            entity.ToTable("tblServiceUsage");
+
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(sysutcdatetime())");
+            entity.Property(e => e.IsBilled).HasDefaultValue(false);
+            entity.Property(e => e.Quantity).HasColumnType("decimal(12, 2)");
+            entity.Property(e => e.TotalCost).HasColumnType("decimal(14, 2)");
+
+            entity.HasOne(d => d.Room).WithMany(p => p.TblServiceUsages)
+                .HasForeignKey(d => d.RoomId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__tblServic__RoomI__01142BA1");
+
+            entity.HasOne(d => d.Service).WithMany(p => p.TblServiceUsages)
+                .HasForeignKey(d => d.ServiceId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__tblServic__Servi__02084FDA");
+        });
+
+        modelBuilder.Entity<TblStudent>(entity =>
+        {
+            entity.HasKey(e => e.StudentId).HasName("PK__tblStude__32C52B99E474E863");
+
+            entity.ToTable("tblStudent");
+
+            entity.HasIndex(e => e.StudentCode, "UQ__tblStude__1FC886044F91963A").IsUnique();
+
+            entity.HasIndex(e => e.CitizenId, "UQ__tblStude__6E49FBED8498BE33").IsUnique();
+
+            entity.Property(e => e.AvatarUrl).HasMaxLength(250);
+            entity.Property(e => e.CitizenId)
+                .HasMaxLength(20)
+                .HasColumnName("CitizenID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Email).HasMaxLength(100);
+            entity.Property(e => e.EmergencyContactName).HasMaxLength(100);
+            entity.Property(e => e.EmergencyContactPhone).HasMaxLength(20);
+            entity.Property(e => e.Faculty).HasMaxLength(100);
+            entity.Property(e => e.FullName).HasMaxLength(100);
+            entity.Property(e => e.Gender).HasMaxLength(10);
+            entity.Property(e => e.Major).HasMaxLength(100);
+            entity.Property(e => e.PermanentAddress).HasMaxLength(250);
+            entity.Property(e => e.Phone).HasMaxLength(20);
+            entity.Property(e => e.StudentCode).HasMaxLength(20);
+            entity.Property(e => e.StudentStatus).HasMaxLength(100);
+            entity.Property(e => e.TemporaryAddress).HasMaxLength(250);
+            entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.HasOne(d => d.Account).WithMany(p => p.TblStudents)
+                .HasForeignKey(d => d.AccountId)
+                .HasConstraintName("FK__tblStuden__Accou__6754599E");
+        });
+
+        modelBuilder.Entity<TblViolation>(entity =>
+        {
+            entity.HasKey(e => e.ViolationId).HasName("PK__tblViola__18B6DC0888D30AAC");
+
+            entity.ToTable("tblViolations");
+
+            entity.Property(e => e.Note).HasMaxLength(255);
+
+            entity.HasOne(d => d.Rule).WithMany(p => p.TblViolations)
+                .HasForeignKey(d => d.RuleId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__tblViolat__RuleI__1EA48E88");
+
+            entity.HasOne(d => d.Student).WithMany(p => p.TblViolations)
+                .HasForeignKey(d => d.StudentId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__tblViolat__Stude__1DB06A4F");
         });
 
         OnModelCreatingPartial(modelBuilder);
