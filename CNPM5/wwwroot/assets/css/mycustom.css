@@ -1,0 +1,925 @@
+﻿/* Thiết lập chung */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Container chính */
+.profile-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* Header - Phần ảnh và tên */
+.profile-header {
+    background: linear-gradient(135deg, #007bff 0%, #06BBCC 100%);
+    color: white;
+    padding: 40px 20px 60px;
+    text-align: center;
+    position: relative;
+}
+
+.avatar-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 15px;
+    padding-bottom: 25px
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.student-name {
+    margin: 5px 0 0;
+    font-size: 1.8em;
+}
+
+.student-id {
+    margin: 0;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* Badge Trạng thái */
+.status-badge {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: #28a745; /* Màu xanh lá cho Active */
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    bottom: 0px;
+    margin: 0px 10px;
+    left: 10px;
+}
+
+/* Nội dung chính - Card */
+.profile-content {
+    padding: 20px;
+    margin-top: -30px; /* Kéo nội dung lên trên header */
+    display: flex;
+    gap: 20px;
+}
+
+/* Thiết lập Card */
+.info-card {
+    flex: 1;
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-top: 5px solid #007bff;
+}
+
+    .info-card h3 {
+        color: #007bff;
+        margin-top: 0;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+        font-size: 1.3em;
+    }
+
+        .info-card h3 i {
+            margin-right: 10px;
+            color: #28a745;
+        }
+
+/* Bố cục Grid cho thông tin chi tiết */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+    .info-grid label {
+        display: block;
+        font-weight: bold;
+        color: #6c757d;
+        font-size: 0.9em;
+        margin-bottom: 3px;
+    }
+
+    .info-grid p {
+        margin: 0;
+        color: #343a40;
+        font-size: 1.1em;
+    }
+
+.room-number {
+    color: #dc3545 !important; /* Màu đỏ nổi bật cho Số phòng */
+    font-weight: bold;
+}
+
+/* Nút Chỉnh sửa */
+.edit-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #ffc107;
+    border: none;
+    border-radius: 6px;
+    color: #343a40;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+    .edit-btn:hover {
+        background-color: #e0a800;
+    }
+
+/* Responsive cơ bản */
+@media (max-width: 768px) {
+    .profile-content
+
+{
+    flex-direction: column;
+}
+
+.info-grid {
+    grid-template-columns: 1fr;
+}
+
+}
+/* Sử dụng CSS cũ (từ câu trả lời trước) cho: .profile-container, .profile-header, .avatar-wrapper, .profile-avatar, .student-name, .student-code, .info-card, .info-grid */
+/* BỔ SUNG thêm CSS mới dưới đây: */
+
+.edit-toggle-btn {
+    display: block;
+    width: 300px;
+    margin: 20px auto;
+    padding: 12px;
+    background-color: #28a745; /* Màu xanh lá nổi bật */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+    .edit-toggle-btn:hover {
+        background-color: #218838;
+        transform: translateY(-1px);
+    }
+
+/* Ẩn/Hiện Form */
+.hidden {
+    display: none !important;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease-out, max-height 0.5s ease-out;
+}
+
+.visible {
+    display: block !important;
+    opacity: 1;
+    max-height: 2000px; /* Giá trị lớn để chứa nội dung */
+    transition: opacity 0.7s ease-in, max-height 0.7s ease-in;
+}
+
+/* Định dạng Form Input */
+.info-card input[type="text"],
+.info-card input[type="date"],
+.info-card input[type="tel"],
+.info-card input[type="email"],
+.info-card select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.info-card label {
+    font-weight: bold;
+    color: #495057;
+    margin-top: 10px;
+    display: block;
+}
+
+.full-width {
+    grid-column: span 2; /* Chiếm hết 2 cột trong grid */
+}
+
+.section-title {
+    grid-column: span 2;
+    color: #007bff;
+    border-bottom: 1px dashed #ced4da;
+    padding-bottom: 5px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.form-actions {
+    grid-column: span 2;
+    text-align: right;
+    margin-top: 20px;
+}
+
+.save-btn, .cancel-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.save-btn {
+    .status-badge background-color: #007bff;
+    color: white;
+}
+
+.cancel-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+
+/* Container và Tiêu đề */
+.expense-management-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Phần Tổng quan Cards */
+.summary-cards-wrapper {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.summary-card {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s;
+    text-align: center;
+}
+
+    .summary-card i {
+        font-size: 2em;
+        margin-bottom: 10px;
+    }
+
+    .summary-card h3 {
+        margin: 0 0 10px 0;
+        font-size: 1.2em;
+        color: #333;
+    }
+
+.debt-card {
+    border-left: 5px solid #dc3545; /* Màu đỏ cho Nợ phí */
+}
+
+    .debt-card i {
+        color: #dc3545;
+    }
+
+.room-fee-card {
+    border-left: 5px solid #ffc107; /* Màu vàng cho Phí phòng */
+}
+
+    .room-fee-card i {
+        color: #ffc107;
+    }
+
+.utility-fee-card {
+    border-left: 5px solid #007bff; /* Màu xanh dương cho Điện/Nước */
+}
+
+    .utility-fee-card i {
+        color: #007bff;
+    }
+
+.debt-amount {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: #dc3545;
+    margin: 5px 0 15px 0;
+}
+
+.due-date {
+    display: block;
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+
+/* Tình trạng Phí (Paid/Unpaid) */
+.fee-status p {
+    margin: 5px 0;
+    font-size: 1em;
+}
+
+.paid {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.unpaid {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* Nút */
+.pay-btn, .detail-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+    .pay-btn.primary {
+        background-color: #dc3545;
+        color: white;
+        margin-top: 15px;
+    }
+
+        .pay-btn.primary:hover {
+            background-color: #c82333;
+        }
+
+.detail-btn {
+    background-color: #e9ecef;
+    color: #333;
+    margin-top: 10px;
+}
+
+    .detail-btn:hover {
+        background-color: #d8d8d8;
+    }
+
+
+/* Phần Bảng */
+.detail-section{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-top: 30px;
+    display: none;
+}
+
+    .detail-section h3, .history-section h3 {
+        color: #007bff;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+        margin-top: 0;
+    }
+
+.utility-detail-table, .payment-history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.95em;
+}
+
+    .utility-detail-table th, .payment-history-table th {
+        background-color: #f8f9fa;
+        padding: 12px;
+        text-align: left;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .utility-detail-table td, .payment-history-table td {
+        padding: 12px;
+        border-bottom: 1px solid #eee;
+        vertical-align: middle;
+    }
+
+    .utility-detail-table tbody tr:hover, .payment-history-table tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+.status-success {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.status-pending {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.status-failed {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.utility-detail-table tfoot td {
+    font-weight: bold;
+    background-color: #e9ecef;
+    border-top: 2px solid #dee2e6;
+}
+
+/* Responsive cơ bản */
+@media (max-width: 992px) {
+    .summary-cards-wrapper
+
+{
+    flex-direction: column;
+}
+}
+
+\/* Container chung */
+.service-request-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    border-radius: 12px;
+}
+
+h2 {
+    color: #007bff;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 10px;
+}
+
+/* Tab Navigation */
+.tab-navigation {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.tab-link {
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    color: #6c757d;
+    transition: all 0.3s;
+}
+
+    .tab-link:hover {
+        color: #007bff;
+    }
+
+    .tab-link.active {
+        color: #007bff;
+        border-bottom: 3px solid #007bff;
+        background-color: #e9ecef;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+/* Tab Content */
+.tab-content {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    display: none; /* Mặc định ẩn tất cả */
+}
+
+.active-tab {
+    display: block; /* Chỉ hiện tab đang active */
+}
+
+/* Form Styles */
+.request-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        color: #343a40;
+        margin-bottom: 5px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="date"],
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .form-group.grid-2-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+.submit-btn {
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+    .submit-btn:hover {
+        background-color: #218838;
+    }
+
+/* Service Registration List */
+.service-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.service-item {
+    padding: 15px;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+}
+
+    .service-item h4 {
+        margin: 0;
+        color: #007bff;
+    }
+
+    .service-item p {
+        flex-grow: 1;
+        margin: 0 20px;
+        color: #6c757d;
+    }
+
+.register-btn {
+    padding: 8px 15px;
+    background-color: #ffc107;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+    .register-btn.registered {
+        background-color: #28a745;
+        color: white;
+        cursor: default;
+        opacity: 0.8;
+    }
+
+/* Status Table */
+.status-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+    .status-table th, .status-table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .status-table th {
+        background-color: #e9ecef;
+    }
+
+.status-pending {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.status-processing {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.status-completed {
+    color: #28a745;
+    font-weight: bold;
+}
+/* Container chung */
+.service-request-container {
+    /* Đã sửa đổi max-width từ 900px thành 1000px để rộng hơn một chút */
+    max-width: 1000px;
+    /* Đảm bảo container được căn giữa */
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    border-radius: 12px;
+}
+
+/* ... Phần còn lại của CSS (Tab, Form, Table) giữ nguyên ... */
+
+/*Thông báo*/
+/* Container và Tiêu đề */
+.notification-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    border-radius: 12px;
+}
+
+h2 {
+    color: #007bff;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 10px;
+}
+
+/* Bố cục hai cột */
+.notification-wrapper {
+    display: flex;
+    gap: 30px;
+}
+
+.personal-alerts, .general-announcements {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Định dạng chung cho các List */
+.alert-list, .announcement-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* --- CẢNH BÁO CÁ NHÂN (ALERTS) --- */
+.personal-alerts h3 {
+    color: #dc3545;
+}
+
+.alert-item {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border-left: 5px solid;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+    .alert-item h4 {
+        margin: 0 0 5px 0;
+        font-size: 1.1em;
+    }
+
+    .alert-item p {
+        margin: 0 0 10px 0;
+        color: #495057;
+    }
+
+.alert-date {
+    display: block;
+    font-size: 0.8em;
+    color: #6c757d;
+}
+
+.action-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none;
+}
+
+    .action-link:hover {
+        text-decoration: underline;
+    }
+
+/* Màu sắc theo mức độ ưu tiên */
+.high-priority {
+    border-left-color: #dc3545;
+}
+/* Đỏ: Cực kỳ quan trọng */
+.medium-priority {
+    border-left-color: #ffc107;
+}
+/* Vàng: Quan trọng */
+.low-priority {
+    border-left-color: #007bff;
+}
+/* Xanh dương: Thông tin/Nhắc nhở */
+
+.high-priority h4 {
+    color: #dc3545;
+}
+
+.medium-priority h4 {
+    color: #ffc107;
+}
+
+
+/* --- THÔNG BÁO CHUNG (ANNOUNCEMENTS) --- */
+.general-announcements h3 {
+    color: #28a745;
+}
+
+.announcement-item {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 3px solid;
+    transition: box-shadow 0.2s;
+}
+
+    .announcement-item:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .announcement-item h4 {
+        margin: 0 0 5px 0;
+        font-size: 1.05em;
+    }
+
+    .announcement-item p {
+        margin: 0;
+        font-size: 0.9em;
+        color: #6c757d;
+    }
+
+.announce-date {
+    display: block;
+    font-size: 0.75em;
+    color: #adb5bd;
+    margin-top: 5px;
+    text-align: right;
+}
+
+/* Màu theo loại thông báo */
+.emergency {
+    border-left-color: #dc3545;
+}
+
+.normal {
+    border-left-color: #28a745;
+}
+
+.view-all-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Responsive cơ bản */
+@media (max-width: 768px) {
+    .notification-wrapper {
+        flex-direction: column;
+    }
+
+    .personal-alerts {
+        margin-bottom: 20px;
+    }
+}
+
+
+/* Bạn cùng phòng*/
+
+/* Container và Tiêu đề */
+.roommate-info-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+    .roommate-info-container h4 {
+        color: #007bff;
+        border-bottom: 2px solid #e9ecef;
+        padding-bottom: 10px;
+    }
+
+/* Lưu ý Quyền Riêng Tư */
+.privacy-note {
+    background-color: #fff3cd; /* Màu vàng nhạt */
+    color: #856404;
+    padding: 10px 15px;
+    border: 1px solid #ffeeba;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+
+    .privacy-note i {
+        margin-right: 8px;
+    }
+
+/* Danh sách Thẻ bạn cùng phòng */
+.roommate-list-wrapper {
+    display: grid;
+    /* Hiển thị 3 cột trên màn hình lớn */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.roommate-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border-top: 5px solid #007bff;
+}
+
+    .roommate-card.host-room {
+        /* Đánh dấu chủ phòng */
+        border-top: 5px solid #28a745;
+    }
+
+.roommate-header {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed #e9ecef;
+}
+
+    .roommate-header i {
+        font-size: 1.2em;
+        margin-right: 10px;
+        color: #007bff;
+    }
+
+.roommate-card.host-room .roommate-header i {
+    color: #28a745;
+}
+
+.roommate-name {
+    margin: 0;
+    font-size: 1.1em;
+    color: #343a40;
+    font-weight: bold;
+}
+
+.info-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+}
+
+    .info-line label {
+        font-weight: 600;
+        color: #6c757d;
+    }
+
+/* Định dạng dữ liệu */
+.contact-data {
+    color: #333;
+    font-weight: 500;
+}
+
+/* Định dạng thông tin ẩn */
+.contact-hidden {
+    color: #dc3545; /* Màu đỏ nhạt để cảnh báo thông tin bị ẩn */
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+/* Responsive cơ bản */
+@media (max-width: 600px) {
+    .roommate-list-wrapper {
+        grid-template-columns: 1fr; /* 1 cột trên điện thoại */
+    }
+}
