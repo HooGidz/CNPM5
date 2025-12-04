@@ -34,7 +34,7 @@ public partial class Cnpm5Context : DbContext
 
     public virtual DbSet<TblServiceUsage> TblServiceUsages { get; set; }
 
-<<<<<<< HEAD
+
     public virtual DbSet<TblStudents> TblStudents { get; set; }
 
     public virtual DbSet<Violation> Violations { get; set; }
@@ -42,17 +42,13 @@ public partial class Cnpm5Context : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=LAPTOP-SFNTDCJC\\ANHTAI;Initial Catalog=CNPM5;Integrated Security=True;TrustServerCertificate=True;");
-=======
-    public virtual DbSet<TblStudent> TblStudents { get; set; }
 
-
-    public virtual DbSet<Violation> Violations { get; set; }
 
     //    protected override void onconfiguring(dbcontextoptionsbuilder optionsbuilder)
     //#warning to protect potentially sensitive information in your connection string, you should move it out of source code. you can avoid scaffolding the connection string by using the name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. for more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?linkid=723263.
     //        => optionsbuilder.usesqlserver("data source=desktop-l7hk7re;initial catalog=cnpm5;integrated security=true;trustservercertificate=true;");
     //        => optionsBuilder.UseSqlServer("Data Source= LAPTOP-SFNTDCJC\\ANHTAI;Initial Catalog=CNPM5;Integrated Security=True;TrustServerCertificate=True;");
->>>>>>> d96acfd2a49552565f66cc66a4024acb7b221595
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -182,14 +178,11 @@ public partial class Cnpm5Context : DbContext
             entity.HasOne(d => d.Floor).WithMany(p => p.TblRooms)
                 .HasForeignKey(d => d.FloorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-<<<<<<< HEAD
-                .HasConstraintName("FK__tblRooms__FloorI__73852659");
-        });
-=======
+
                 .HasConstraintName("FK__Rooms__FloorId__60A75C0F");
         });
 
->>>>>>> d96acfd2a49552565f66cc66a4024acb7b221595
+
 
         modelBuilder.Entity<TblService>(entity =>
         {
@@ -260,14 +253,11 @@ public partial class Cnpm5Context : DbContext
 
             entity.HasOne(d => d.Account).WithMany(p => p.TblStudents)
                 .HasForeignKey(d => d.AccountId)
-<<<<<<< HEAD
-                .HasConstraintName("FK__tblStuden__Accou__534D60F1");
-        });
-=======
+
                 .HasConstraintName("FK__tblStuden__Accou__6754599E");
         });
 
->>>>>>> d96acfd2a49552565f66cc66a4024acb7b221595
+
 
         modelBuilder.Entity<Violation>(entity =>
         {
