@@ -18,8 +18,8 @@
     <thead>
         <tr>
             <th>STT</th>
+			<th>Họ và tên</th>
             <th>Mã SSV</th>
-            <th>Họ và tên</th>
             <th>Giới tính</th>
             <th>Năm sinh</th>
             <th>SĐT</th>
@@ -45,12 +45,13 @@
         @foreach (var item in Model) {
         <tr>
             <td>@(i++)</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.FullName)
+				</td>
             <td>
                 @Html.DisplayFor(modelItem => item.StudentCode)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FullName)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Gender)
             </td>
