@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CNPM5.Models;
 
-public partial class TblStudent
+
+public partial class TblStudents
 {
     public int StudentId { get; set; }
 
@@ -31,7 +33,7 @@ public partial class TblStudent
 
     public string? AvatarUrl { get; set; }
 
-    public string StudentStatus { get; set; } = null!;
+    public string? StudentStatus { get; set; }
 
     public string? EmergencyContactName { get; set; }
 
@@ -46,4 +48,5 @@ public partial class TblStudent
     public virtual TblAccount? Account { get; set; }
 
     public virtual ICollection<Violation> Violations { get; set; } = new List<Violation>();
+
 }

@@ -17,8 +17,7 @@ public partial class Rule
 
     public string? Status { get; set; }
 
-    
-    public int? AccountId { get; set; }
+    public int AccountId { get; set; }
 
     public DateTime? CreatedDate { get; set; }
 

@@ -1,0 +1,93 @@
+﻿@model CNPM5.Models.TblRoom
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<h1>Xoá phòng</h1>
+
+<h3>Bạn có chắc chắn muốn xoá phòng này không?</h3>
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-md-4 card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="RoomId" />
+            <div class="form-group">
+                <div class="mb-3 row">
+                    <label asp-for="RoomName" for="html5-text-input" class="col-md-2 col-form-label">Tên phòng</label>
+                    <div class="col-md-10">
+                        <input asp-for="RoomName" class="form-control" type="text" id="exampleFormControlReadOnlyInput1" placeholder="Readonly input here..." readonly="">
+                    </div>
+                </div>
+            </div>
+@*             <div class="form-group">
+                <div class="mb-3 row">
+                    <label asp-for="FloorId" for="html5-text-input" class="col-md-2 col-form-label">Thuộc tầng</label>
+                    <div class="col-md-10">
+                        <input asp-for="RoomName" class="form-control" type="text" id="exampleFormControlReadOnlyInput1" placeholder="Readonly input here..." readonly="">
+                    </div>
+                </div>
+            </div> *@
+            <div class="form-group">
+                <div class="mb-3 row">
+                    <label asp-for="Capacity" for="html5-text-input" class="col-md-2 col-form-label">Sức chứa</label>
+                    <div class="col-md-10">
+                        <input asp-for="Capacity" class="form-control" type="text" id="exampleFormControlReadOnlyInput1" placeholder="Readonly input here..." readonly="">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="mb-3 row">
+                    <label asp-for="CurrentOccupants" for="html5-text-input" class="col-md-2 col-form-label">Số người ở hiện tại</label>
+                    <div class="col-md-10">
+                        <input asp-for="CurrentOccupants" class="form-control" type="text" id="exampleFormControlReadOnlyInput1" placeholder="Readonly input here..." readonly="">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="mb-3 row">
+                    <label asp-for="Gender" for="html5-text-input" class="col-md-2 col-form-label">Giới tính</label>
+                    <div class="col-md-10">
+                        <input asp-for="Gender" class="form-control" type="text" id="exampleFormControlReadOnlyInput1" placeholder="Readonly input here..." readonly="">
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="mb-3 row">
+                    <label asp-for="RoomType" for="html5-text-input" class="col-md-2 col-form-label">Loại phòng</label>
+                    <div class="col-md-10">
+                        <input asp-for="RoomType" class="form-control" type="text" id="exampleFormControlReadOnlyInput1" placeholder="Readonly input here..." readonly="">
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="mb-3 row">
+                    <label asp-for="Price" for="html5-text-input" class="col-md-2 col-form-label">Giá tiền</label>
+                    <div class="col-md-10">
+                        <input asp-for="Price" class="form-control" type="text" id="exampleFormControlReadOnlyInput1" placeholder="Readonly input here..." readonly="">
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="mb-3 row">
+                    <label asp-for="Status" for="html5-text-input" class="col-md-2 col-form-label">Trạng thái</label>
+                    <div class="col-md-10">
+                        <input asp-for="Status" class="form-control" type="text" id="exampleFormControlReadOnlyInput1" placeholder="Readonly input here..." readonly="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="RoomId" />
+        <input type="submit" value="Xoá" class="btn btn-danger" /> |
+        <a asp-action="Index">
+            <button type="button" class="btn btn-dark">Quay lại</button>
+        </a>
+    </form>
+</div>

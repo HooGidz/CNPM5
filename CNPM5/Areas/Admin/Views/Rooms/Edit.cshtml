@@ -1,62 +1,63 @@
-﻿@model CNPM5.Models.TblAccount
+﻿@model CNPM5.Models.TblRoom
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Thêm tài khoản</h1>
 
+<h1>Sửa thông tin phòng</h1>
 <hr />
 <div class="row">
     <div class="col-md-4 card-body">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="RoomId" />
             <div class="form-group">
                 <div class="mb-3 row">
-                    <label asp-for="Username" for="html5-text-input" class="col-md-2 col-form-label">Tên tài khoản</label>
+                    <label asp-for="RoomName" for="html5-text-input" class="col-md-2 col-form-label">Tên phòng</label>
                     <div class="col-md-10">
-                        <input asp-for="Username" class="form-control" type="text" id="html5-text-input">
+                        <input asp-for="RoomName" class="form-control" type="text" id="html5-text-input">
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="mb-3 row">
-                    <label asp-for="Password" for="html5-text-input" class="col-md-2 col-form-label">Mật khẩu</label>
+                    <label asp-for="Capacity" for="html5-text-input" class="col-md-2 col-form-label">Sức chứa</label>
                     <div class="col-md-10">
-                        <input asp-for="Password" class="form-control" type="text" id="html5-text-input">
+                        <input asp-for="Capacity" class="form-control" type="text" id="html5-text-input">
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="mb-3 row">
-                    <label asp-for="FullName" for="html5-text-input" class="col-md-2 col-form-label">Họ và tên</label>
+                    <label asp-for="CurrentOccupants" for="html5-text-input" class="col-md-2 col-form-label">Số người ở hiện tại</label>
                     <div class="col-md-10">
-                        <input asp-for="FullName" class="form-control" type="text" id="html5-text-input">
+                        <input asp-for="CurrentOccupants" class="form-control" type="text" id="html5-text-input">
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="mb-3 row">
-                    <label asp-for="Phone" for="html5-text-input" class="col-md-2 col-form-label">Số điện thoại</label>
+                    <label asp-for="Gender" for="html5-text-input" class="col-md-2 col-form-label">Giới tính</label>
                     <div class="col-md-10">
-                        <input asp-for="Phone" class="form-control" type="text" id="html5-text-input">
+                        <input asp-for="Gender" class="form-control" type="text" id="html5-text-input">
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="mb-3 row">
-                    <label asp-for="Email" for="html5-text-input" class="col-md-2 col-form-label">Email</label>
+                    <label asp-for="RoomType" for="html5-text-input" class="col-md-2 col-form-label">Loại phòng</label>
                     <div class="col-md-10">
-                        <input asp-for="Email" class="form-control" type="text" id="html5-text-input">
+                        <input asp-for="RoomType" class="form-control" type="text" id="html5-text-input">
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="mb-3 row">
-                    <label asp-for="RoleId" for="html5-text-input" class="col-md-2 col-form-label">Phân quyền</label>
+                    <label asp-for="Price" for="html5-text-input" class="col-md-2 col-form-label">Giá tiền</label>
                     <div class="col-md-10">
-                        <select asp-for="RoleId" asp-items="ViewBag.RoleId" class="form-select" id="exampleFormControlSelect1" aria-label="Default select example"></select>
+                        <input asp-for="Price" class="form-control" type="text" id="html5-text-input">
                     </div>
                 </div>
             </div>
@@ -69,7 +70,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <input type="submit" value="Thêm" class="btn btn-primary" />
+                <input type="submit" value="Xác nhận" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -81,9 +82,6 @@
     </a>
 </div>
 
-
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

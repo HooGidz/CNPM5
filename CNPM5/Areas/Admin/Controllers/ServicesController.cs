@@ -10,23 +10,22 @@ using CNPM5.Models;
 namespace CNPM5.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AccountsController : Controller
+    public class ServicesController : Controller
     {
         private readonly Cnpm5Context _context;
 
-        public AccountsController(Cnpm5Context context)
+        public ServicesController(Cnpm5Context context)
         {
             _context = context;
         }
 
-        // GET: Admin/Accounts
+        // GET: Admin/Services
         public async Task<IActionResult> Index()
         {
-            
-            return View(await _context.TblAccounts.ToListAsync());
+            return View(await _context.TblServices.ToListAsync());
         }
 
-        // GET: Admin/Accounts/Details/5
+        // GET: Admin/Services/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +33,39 @@ namespace CNPM5.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var tblAccount = await _context.TblAccounts
-                .FirstOrDefaultAsync(m => m.AccountId == id);
-            if (tblAccount == null)
+            var tblService = await _context.TblServices
+                .FirstOrDefaultAsync(m => m.ServiceId == id);
+            if (tblService == null)
             {
                 return NotFound();
             }
 
-            return View(tblAccount);
+            return View(tblService);
         }
 
-        // GET: Admin/Accounts/Create
+        // GET: Admin/Services/Create
         public IActionResult Create()
         {
-            ViewData["RoleId"] = new SelectList(_context.TblRoles, "RoleId", "RoleName");
             return View();
         }
 
-        // POST: Admin/Accounts/Create
+        // POST: Admin/Services/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AccountId,Username,Password,FullName,Phone,Email,RoleId,LastLogin,CreatedDate,Status")] TblAccount tblAccount)
+        public async Task<IActionResult> Create([Bind("ServiceId,Name,Unit,Price,CreatedAt,UpdatedAt")] TblService tblService)
         {
-          
             if (ModelState.IsValid)
             {
-            _context.Add(tblAccount);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+                _context.Add(tblService);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            
-            return View(tblAccount);
+            return View(tblService);
         }
 
-        // GET: Admin/Accounts/Edit/5
+        // GET: Admin/Services/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +73,22 @@ namespace CNPM5.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var tblAccount = await _context.TblAccounts.FindAsync(id);
-            if (tblAccount == null)
+            var tblService = await _context.TblServices.FindAsync(id);
+            if (tblService == null)
             {
                 return NotFound();
             }
-            ViewData["RoleId"] = new SelectList(_context.TblRoles, "RoleId", "RoleName", tblAccount.RoleId);
-            return View(tblAccount);
+            return View(tblService);
         }
 
-        // POST: Admin/Accounts/Edit/5
+        // POST: Admin/Services/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AccountId,Username,Password,FullName,Phone,Email,RoleId,LastLogin,CreatedDate,Status")] TblAccount tblAccount)
+        public async Task<IActionResult> Edit(int id, [Bind("ServiceId,Name,Unit,Price,CreatedAt,UpdatedAt")] TblService tblService)
         {
-            if (id != tblAccount.AccountId)
+            if (id != tblService.ServiceId)
             {
                 return NotFound();
             }
@@ -102,12 +97,13 @@ namespace CNPM5.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(tblAccount);
+                    tblService.UpdatedAt = DateTime.Now;
+                    _context.Update(tblService);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TblAccountExists(tblAccount.AccountId))
+                    if (!TblServiceExists(tblService.ServiceId))
                     {
                         return NotFound();
                     }
@@ -118,11 +114,10 @@ namespace CNPM5.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoleId"] = new SelectList(_context.TblRoles, "RoleId", "RoleName", tblAccount.RoleId);
-            return View(tblAccount);
+            return View(tblService);
         }
 
-        // GET: Admin/Accounts/Delete/5
+        // GET: Admin/Services/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,34 +125,34 @@ namespace CNPM5.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var tblAccount = await _context.TblAccounts
-                .FirstOrDefaultAsync(m => m.AccountId == id);
-            if (tblAccount == null)
+            var tblService = await _context.TblServices
+                .FirstOrDefaultAsync(m => m.ServiceId == id);
+            if (tblService == null)
             {
                 return NotFound();
             }
 
-            return View(tblAccount);
+            return View(tblService);
         }
 
-        // POST: Admin/Accounts/Delete/5
+        // POST: Admin/Services/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tblAccount = await _context.TblAccounts.FindAsync(id);
-            if (tblAccount != null)
+            var tblService = await _context.TblServices.FindAsync(id);
+            if (tblService != null)
             {
-                _context.TblAccounts.Remove(tblAccount);
+                _context.TblServices.Remove(tblService);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TblAccountExists(int id)
+        private bool TblServiceExists(int id)
         {
-            return _context.TblAccounts.Any(e => e.AccountId == id);
+            return _context.TblServices.Any(e => e.ServiceId == id);
         }
     }
 }

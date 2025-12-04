@@ -52,12 +52,10 @@ namespace CNPM5.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: Admin/Students/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StudentId,StudentCode,FullName,Gender,BirthDate,Phone,Email,Faculty,Major,CitizenId,PermanentAddress,TemporaryAddress,AvatarUrl,StudentStatus,EmergencyContactName,EmergencyContactPhone,CreatedAt,UpdatedAt,AccountId")] TblStudent tblStudent)
+        public async Task<IActionResult> Create([Bind("StudentId,StudentCode,FullName,Gender,BirthDate,Phone,Email,Faculty,Major,CitizenId,PermanentAddress,TemporaryAddress,AvatarUrl,StudentStatus,EmergencyContactName,EmergencyContactPhone,CreatedAt,UpdatedAt,AccountId")] TblStudents tblStudent)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +89,7 @@ namespace CNPM5.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StudentId,StudentCode,FullName,Gender,BirthDate,Phone,Email,Faculty,Major,CitizenId,PermanentAddress,TemporaryAddress,AvatarUrl,StudentStatus,EmergencyContactName,EmergencyContactPhone,CreatedAt,UpdatedAt,AccountId")] TblStudent tblStudent)
+        public async Task<IActionResult> Edit(int id, [Bind("StudentId,StudentCode,FullName,Gender,BirthDate,Phone,Email,Faculty,Major,CitizenId,PermanentAddress,TemporaryAddress,AvatarUrl,StudentStatus,EmergencyContactName,EmergencyContactPhone,CreatedAt,UpdatedAt,AccountId")] TblStudents tblStudent)
         {
             if (id != tblStudent.StudentId)
             {

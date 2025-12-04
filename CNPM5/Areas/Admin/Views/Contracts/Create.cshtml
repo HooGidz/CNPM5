@@ -1,0 +1,90 @@
+﻿@model CNPM5.Models.Contract
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Thêm hợp đồng</h1>
+
+<div class="row">
+    <div class="col-md-4 card-body">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="StudentId">Sinh viên</label>
+                <select asp-for="StudentId" asp-items="@(ViewData["StudentId"] as SelectList)" class="form-control">
+                    <option value="">--- Chọn Sinh viên ---</option>
+                </select>
+                <span asp-validation-for="StudentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomId">Phòng</label>
+                <select asp-for="RoomId" asp-items="@(ViewData["RoomId"] as SelectList)" class="form-control">
+                    <option value="">--- Chọn phòng ---</option>
+                </select>
+                <span asp-validation-for="RoomId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ServiceId">Dịch Vụ</label>
+                <select asp-for="ServiceId" asp-items="@(ViewData["ServiceId"] as SelectList)" class="form-control">
+                    <option value="">--- Chọn Dịch vụ ---</option>
+                </select>
+                <span asp-validation-for="ServiceId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label">Ngày bắt đầu</label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label">Ngày kết thúc</label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Deposit" class="control-label">Tiền cọc</label>
+                <input asp-for="Deposit" class="form-control" />
+                <span asp-validation-for="Deposit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MonthlyFee" class="control-label">Tiền phòng theo tháng</label>
+                <input asp-for="MonthlyFee" class="form-control" />
+                <span asp-validation-for="MonthlyFee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cycle" class="control-label">Chu kỳ</label>
+                <input asp-for="Cycle" class="form-control" />
+                <span asp-validation-for="Cycle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Harvestday" class="control-label">Ngày thu</label>
+                <input asp-for="Harvestday" class="form-control" />
+                <span asp-validation-for="Harvestday" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label">Trạng thái</label>
+                <input asp-for="Status" class="form-control" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AccountId">Người tạo</label>
+                <select asp-for="AccountId" asp-items="@(ViewData["AccountId"] as SelectList)" class="form-control">
+                    <option value="">--- Chọn người tạo ---</option>
+                </select>
+                <span asp-validation-for="AccountId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Thêm" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Quay lại</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

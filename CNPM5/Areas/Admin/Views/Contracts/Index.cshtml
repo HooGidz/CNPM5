@@ -1,0 +1,118 @@
+﻿@model IEnumerable<CNPM5.Models.Contract>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Quản lý hợp đồng</h1>
+
+<p>
+    <a asp-action="Create">
+        <button type="button" class="btn btn-primary">
+            <span class="tf-icons bx bx-plus"></span>&nbsp; Thêm mới
+        </button>
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Mã sinh viên
+                
+            </th>
+            <th>
+                Mã phòng
+            </th>
+            <th>
+                Mã dịch vụ
+            </th>
+            <th>
+                Ngày bắt đầu
+            </th>
+            <th>
+                Ngày kết thúc
+            </th>
+            <th>
+                Tiền đặt cọc
+            </th>
+            <th>
+                Tiền phòng theo tháng
+            </th>
+            <th>
+                Chu kỳ
+            </th>
+            <th>
+                Ngày thu
+            </th>
+            <th>
+                Trạng thái
+            </th>
+            <th>
+                Người tạo
+            </th>
+            <th>
+                Ngày tạo
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 1;
+        }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @(item.Student?.FullName??"Không rõ sinh viên")
+            </td>
+            <td>
+                @(item.Room?.RoomName??"Không rõ tên phòng")
+            </td>
+            <td>
+                @(item.Service?.Name??"Không rõ tên dịch vụ")
+            </td>
+            <td>
+                    @item.StartDate.ToString("dd/MM/yyyy")
+                    
+            </td>
+               <td>
+                    @item.EndDate?.ToString("dd/MM/yyyy")
+               </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deposit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MonthlyFee)
+            </td>
+            <td>
+                    @item.Cycle.ToString("MM/yyyy")
+            </td>
+            <td>
+                    @item.Harvestday.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                    @(item.Account?.FullName ?? "Không rõ người tạo")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+                <td>
+                    <div class="dropdown">
+                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                            <i class="bx bx-dots-vertical-rounded"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.ContractId"><i class="bx bx-edit-alt me-1"></i> Sửa</a>
+                            <a class="dropdown-item" asp-action="Details" asp-route-id="@item.ContractId"><i class="bx bx-edit-alt me-1"></i> Chi tiết</a>
+                            <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.ContractId"><i class="bx bx-trash me-1"></i> Xoá</a>
+                        </div>
+                    </div>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

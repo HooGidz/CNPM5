@@ -4,60 +4,71 @@
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+<div class="p-3">
+	<h1>Quản lý tài khoản</h1>
 
-<h1>Quản lý tài khoản</h1>
-
-<p>
-    <a asp-action="Create">
-        <button type="button" class="btn btn-primary">
-            <span class="tf-icons bx bx-plus"></span>&nbsp; Thêm tài khoản
-		</button>
-    </a>
-</p>
-<div class="table-responsive text-nowrap">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>STT</th>
-                <th>Tên tài khoản</th>
-                <th>SĐT</th>
-                <th>Email</th>
-                <th>Trạng thái</th>
-            </tr>
-        </thead>
-        <tbody class="table-border-bottom-0">
-            @{
-                int i = 1;
-            }
-            @foreach (var item in Model)
-            {
-                <tr>
-                    @*<td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>@</strong></td> *@
-                    <td>@(i++)</td>
-                    <td>
-				        @Html.DisplayFor(modelItem => item.Username)
-                    </td>
-                    <td>
-				        @Html.DisplayFor(modelItem => item.Phone)
-                    </td>
-                    <td>
-					        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                        <td><span class="badge bg-label-primary me-1">@Html.DisplayFor(modelItem => item.Status)</span></td>
-                    <td>
-                        <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.AccountId"><i class="bx bx-edit-alt me-1"></i> Sửa</a>
-                                <a class="dropdown-item" asp-action="Details" asp-route-id="@item.AccountId"><i class="bx bx-edit-alt me-1"></i> Chi tiết</a>
-                                <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.AccountId"><i class="bx bx-trash me-1"></i> Xoá</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+	<p>
+		<a asp-action="Create">
+			<button type="button" class="btn btn-primary">
+				<span class="tf-icons bx bx-plus"></span>&nbsp; Thêm tài khoản
+			</button>
+		</a>
+	</p>
+	<div class="table-responsive text-nowrap">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>STT</th>
+					<th>Tên đăng nhập</th>
+					<th>Họ tên</th>
+					<th>SĐT</th>
+					<th>Vai trò</th>
+					<th>Trạng thái</th>
+				</tr>
+			</thead>
+			<tbody class="table-border-bottom-0">
+				@{
+					int i = 1;
+				}
+				@foreach (var item in Model)
+				{
+					<tr>
+						@*<td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>@</strong></td> *@
+						<td>@(i++)</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Username)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.FullName)
+						<td>
+							@Html.DisplayFor(modelItem => item.Phone)
+						</td>
+						<td>
+							@if (item.RoleId == 1)
+								{
+									<span>Quản trị viên</span>
+								}
+								else if (item.RoleId == 2)
+								{
+									<span>Sinh viên</span>
+								}
+						</td>
+						<td><span class="badge bg-label-primary me-1">@Html.DisplayFor(modelItem => item.Status)</span></td>
+						<td>
+							<div class="dropdown">
+								<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+									<i class="bx bx-dots-vertical-rounded"></i>
+								</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" asp-action="Edit" asp-route-id="@item.AccountId"><i class="bx bx-edit-alt me-1"></i> Sửa</a>
+									<a class="dropdown-item" asp-action="Details" asp-route-id="@item.AccountId"><i class="bx bx-edit-alt me-1"></i> Chi tiết</a>
+									<a class="dropdown-item" asp-action="Delete" asp-route-id="@item.AccountId"><i class="bx bx-trash me-1"></i> Xoá</a>
+								</div>
+							</div>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
 </div>
