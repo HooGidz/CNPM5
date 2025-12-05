@@ -46,6 +46,7 @@ namespace CNPM5.Areas.Admin.Controllers
         // GET: Admin/Accounts/Create
         public IActionResult Create()
         {
+           // ViewBag.RoleId = new SelectList(_context.TblRoles, "RoleId", "RoleName");
             return View();
         }
 
@@ -58,11 +59,14 @@ namespace CNPM5.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                tblAccount.Username = CNPM5.Utilities.Function.TitleSlugGenerationAlias(tblAccount.Username);
                 _context.Add(tblAccount);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            //ViewBag.RoleId = new SelectList(_context.TblRoles, "RoleId", "RoleName", tblAccount.RoleId);
             return View(tblAccount);
+            //return View("Index", await _context.TblAccounts.ToListAsync());
         }
 
         // GET: Admin/Accounts/Edit/5
