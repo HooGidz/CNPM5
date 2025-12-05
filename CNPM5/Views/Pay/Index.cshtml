@@ -1,0 +1,135 @@
+﻿
+<!-- Header Start -->
+<div class="container-fluid bg-primary py-5 mb-5 page-header">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <h1 class="display-3 text-white animated slideInDown">Trang cá nhân</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a class="text-white" href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a class="text-white" href="#">Trang cá nhân</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+<div class="expense-management-container">
+    <h2>💰 Quản Lý Chi Phí & Thanh Toán</h2>
+
+    <div class="summary-cards-wrapper">
+        <div class="summary-card debt-card">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Tổng Nợ Phí Hiện Tại</h3>
+            <p class="debt-amount">850.000 VNĐ</p>
+            <span class="due-date">Hạn chót: 20/12/2025</span>
+            <button class="pay-btn primary" onclick="openPaymentModal()">Thanh Toán Ngay</button>
+        </div>
+
+        <div class="summary-card room-fee-card">
+            <i class="fas fa-home"></i>
+            <h3>Phí Thuê Phòng</h3>
+            <div class="fee-status paid">
+                <p>Kỳ hiện tại (T12/2025): Đã đóng</p>
+                <p>Số tiền: 1.200.000 VNĐ</p>
+            </div>
+        </div>
+
+        <div class="summary-card utility-fee-card">
+            <i class="fas fa-plug"></i>
+            <h3>Điện & Nước (T11/2025)</h3>
+            <div class="fee-status unpaid">
+                <p>Tình trạng: Còn nợ</p>
+                <p>Tổng tiền: 650.000 VNĐ</p>
+            </div>
+            <button class="detail-btn" onclick="showUtilityDetail()">Xem chi tiết</button>
+        </div>
+    </div>
+
+    <div class="detail-section">
+        <h3>⚡ Chi Tiết Chi Phí Điện Nước Gần Nhất (T11/2025)</h3>
+        <table class="utility-detail-table">
+            <thead>
+                <tr>
+                    <th>Loại</th>
+                    <th>Chỉ số Đầu</th>
+                    <th>Chỉ số Cuối</th>
+                    <th>Đã tiêu thụ</th>
+                    <th>Đơn giá</th>
+                    <th>Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Điện (kWh)</td>
+                    <td>1500</td>
+                    <td>1650</td>
+                    <td>150</td>
+                    <td>2.500</td>
+                    <td>375.000 VNĐ</td>
+                </tr>
+                <tr>
+                    <td>Nước ($m^3$)</td>
+                    <td>25</td>
+                    <td>35</td>
+                    <td>10</td>
+                    <td>25.000</td>
+                    <td>250.000 VNĐ</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">Tổng cộng</td>
+                    <td>625.000 VNĐ</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="history-section">
+        <h3>📜 Lịch Sử Thanh Toán</h3>
+        <table class="payment-history-table">
+            <thead>
+                <tr>
+                    <th>Ngày thanh toán</th>
+                    <th>Mã giao dịch</th>
+                    <th>Loại phí</th>
+                    <th>Số tiền</th>
+                    <th>Trạng thái</th>
+                    <th>Chi tiết</th>
+                </tr>
+            </thead>
+            <tbody id="paymentHistoryBody">
+                <tr>
+                    <td>01/12/2025</td>
+                    <td>TXN12345</td>
+                    <td>Phí phòng T12</td>
+                    <td>1.200.000</td>
+                    <td class="status-success">Thành công</td>
+                    <td><a href="#">Xem</a></td>
+                </tr>
+                <tr>
+                    <td>15/11/2025</td>
+                    <td>TXN98765</td>
+                    <td>Điện nước T10</td>
+                    <td>580.000</td>
+                    <td class="status-success">Thành công</td>
+                    <td><a href="#">Xem</a></td>
+                </tr>
+                <tr>
+                    <td>05/09/2025</td>
+                    <td>TXN00112</td>
+                    <td>Phí cọc (Deposit)</td>
+                    <td>500.000</td>
+                    <td class="status-success">Thành công</td>
+                    <td><a href="#">Xem</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="paymentModal" class="modal">
+</div>

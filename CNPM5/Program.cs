@@ -1,7 +1,14 @@
 using CNPM5.Models;
 using Microsoft.EntityFrameworkCore;
+<<<<<<< HEAD
+=======
+using System.Globalization;
+>>>>>>> 349c052ffd8c3acf4d44a8afe9da110c3781c1d0
 
 var builder = WebApplication.CreateBuilder(args);
+var cultureInfo = new CultureInfo("en-US");
+cultureInfo.DateTimeFormat.ShortDatePattern = "yyyy-MM-dd";
+cultureInfo.DateTimeFormat.LongDatePattern = "yyyy-MM-dd HH:mm:ss";
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -9,7 +16,10 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddDbContext<Cnpm5Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 349c052ffd8c3acf4d44a8afe9da110c3781c1d0
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

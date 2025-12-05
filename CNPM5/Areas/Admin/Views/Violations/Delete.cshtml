@@ -1,0 +1,48 @@
+﻿@model CNPM5.Models.Violation
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Xóa vi phạm</h1>
+
+<h3>Bạn chắc chắn xóa vi phạm này không?</h3>
+<div>
+    
+    <dl class="row">
+        <div class="col-md-4 card-body">
+            <form asp-action="Delete" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="ViolationId" />
+
+                <div class="form-group">
+                    <label class="control-label">Sinh viên</label>
+                    <input type="text" class="form-control" value="@Model.Student.FullName (@Model.Student.StudentCode)" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Nội quy</label>
+                    <input type="text" class="form-control" value="@Model.Rule.RuleName" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Ngày vi phạm</label>
+                    <input type="text" class="form-control" value="@Model.ViolationDate.Value.ToString("dd/MM/yyyy HH:mm")" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Ghi chú</label>
+                    <input type="text" class="form-control" value="@Model.Note" readonly />
+                </div>
+            </form>
+        </div>
+    </dl>
+    
+    <form asp-action="Delete" >
+        
+        <input type="hidden" asp-for="ViolationId" />
+        <input type="submit" value="Xóa" class="btn btn-danger" /> |
+        <a asp-action="Index">Quay lại</a>
+    </form>
+</div>

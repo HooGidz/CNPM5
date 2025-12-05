@@ -1,0 +1,218 @@
+﻿@{
+}
+
+<!-- Header Start -->
+<div class="container-fluid bg-primary py-5 mb-5 page-header">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <h1 class="display-3 text-white animated slideInDown">Trang cá nhân</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a class="text-white" href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a class="text-white" href="#">Trang cá nhân</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+<div class="profile-container">
+    <div class="profile-header">
+        <div class="avatar-wrapper">
+			<img src="~/assets/img/team-1.jpg" alt="Ảnh đại diện" class="profile-avatar">
+			<div class="status-badge active">Đang ở</div>
+        </div>
+		
+        <h2 style="color:#ffff;" class="student-name">NGUYỄN VĂN A</h2>
+        <p class="student-code">MSSV: 21H112001</p>
+    </div>
+
+    <button class="edit-toggle-btn" onclick="toggleEditMode()">
+        Chỉnh sửa thông tin cá nhân
+    </button>
+
+    <div class="info-card personal-info">
+        <h3><i class="fas fa-user-alt"></i> Thông Tin Cơ Bản</h3>
+
+        <div class="display-mode">
+            <div class="info-grid">
+                <div><label>Họ và Tên:</label><p>NGUYỄN VĂN A</p></div>
+                <div><label>Mã Sinh Viên:</label><p>21H112001</p></div>
+                <div><label>Ngày sinh:</label><p>20/10/2003</p></div>
+                <div><label>Giới tính:</label><p>Nam</p></div>
+            </div>
+        </div>
+
+        <div class="edit-mode hidden">
+            <form id="personal-edit-form">
+				<div class="info-grid">
+                    <div>
+                        <label for="fullName">Họ và Tên</label>
+                        <input  type="text" id="fullName" value="NGUYỄN VĂN A" required>
+                    </div>
+                    <div>
+                        <label for="studentCode">Mã Sinh Viên (Không sửa)</label>
+                        <input type="text" id="studentCode" value="21H112001" readonly>
+                    </div>
+                    <div>
+                        <label for="birthDate">Ngày sinh</label>
+                        <input type="date" id="birthDate" value="2003-10-20" required>
+                    </div>
+                    <div>
+                        <label for="gender">Giới tính</label>
+                        <select id="gender">
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                        </select>
+                    </div>
+                </div>
+
+                <h4 class="section-title">Thông Tin Liên Hệ</h4>
+                <div class="info-grid">
+                    <div>
+                        <label for="phone">Điện thoại</label>
+                        <input type="tel" id="phone" value="0987 654 321">
+                    </div>
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" value="vana.21h@sv.edu.vn">
+                    </div>
+                    <div class="full-width">
+                        <label for="pAddress">Địa chỉ Thường trú</label>
+                        <input type="text" id="pAddress" value="Số 1, Phường X, Quận Y" required>
+                    </div>
+                    <div class="full-width">
+                        <label for="tAddress">Địa chỉ Tạm trú</label>
+                        <input type="text" id="tAddress" value="Số 5, KTX Nhà H3" required>
+                    </div>
+                </div>
+
+                <h4 class="section-title">Thông Tin Học Tập</h4>
+                <div class="info-grid">
+                    <div>
+                        <label for="faculty">Khoa</label>
+                        <input type="text" id="faculty" value="Công nghệ thông tin">
+                    </div>
+                    <div>
+                        <label for="major">Ngành</label>
+                        <input type="text" id="major" value="Kỹ thuật phần mềm">
+                    </div>
+                    <div>
+                        <label for="citizenID">CCCD/CMND</label>
+                        <input type="text" id="citizenID" value="012345678901">
+                    </div>
+                    <div>
+                        <label for="accountID">Tài khoản (ID)</label>
+                        <input type="text" id="accountID" value="12345" readonly>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="save-btn">Lưu thay đổi</button>
+                    <button type="button" class="cancel-btn" onclick="toggleEditMode()">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="info-card ktx-info">
+        <h3><i class="fas fa-bed"></i> Thông Tin Chỗ Ở</h3>
+        <div class="info-grid">
+            <div>
+                <label>Tên Ký túc xá:</label>
+                <p>Khu A</p>
+            </div>
+            <div>
+                <label>Tòa/Dãy nhà:</label>
+                <p>Nhà H3</p>
+            </div>
+            <div>
+                <label>Số phòng:</label>
+                <p class="room-number">305</p>
+            </div>
+            <div>
+                <label>Loại phòng:</label>
+                <p>4 người/Phòng (Có điều hòa)</p>
+            </div>
+            <div>
+                <label>Ngày bắt đầu HĐ:</label>
+                <p>15/09/2024</p>
+            </div>
+            <div>
+                <label>Ngày kết thúc HĐ:</label>
+                <p>15/09/2025</p>
+            </div>
+        </div>
+    </div>
+    <div class="roommate-info-container">
+        <h4>🤝 Thông Tin Bạn Cùng Phòng</h4>
+
+        <div class="privacy-note">
+            <i class="fas fa-info-circle"></i>
+            Thông tin liên hệ (SĐT, Email) chỉ hiển thị khi **được sự đồng ý** của sinh viên đó.
+        </div>
+
+        <div class="roommate-list-wrapper">
+
+            <div class="roommate-card host-room">
+                <div class="roommate-header">
+                    <i class="fas fa-user-check"></i>
+                    <h4 class="roommate-name">TRẦN THỊ B (CHỦ PHÒNG)</h4>
+                </div>
+                <div class="info-line">
+                    <label>Mã Sinh Viên:</label>
+                    <span>21H112002</span>
+                </div>
+                <div class="info-line">
+                    <label>Số Điện Thoại:</label>
+                    <span class="contact-data">0901 234 567</span>
+                </div>
+                <div class="info-line">
+                    <label>Email:</label>
+                    <span class="contact-data">thib.21h@sv.edu.vn</span>
+                </div>
+            </div>
+
+            <div class="roommate-card">
+                <div class="roommate-header">
+                    <i class="fas fa-user"></i>
+                    <h4 class="roommate-name">LÊ VĂN C</h4>
+                </div>
+                <div class="info-line">
+                    <label>Mã Sinh Viên:</label>
+                    <span>20H111005</span>
+                </div>
+                <div class="info-line">
+                    <label>Số Điện Thoại:</label>
+                    <span class="contact-hidden">Đã ẩn (Vì lý do riêng tư)</span>
+                </div>
+                <div class="info-line">
+                    <label>Email:</label>
+                    <span class="contact-hidden">Đã ẩn (Vì lý do riêng tư)</span>
+                </div>
+            </div>
+
+            <div class="roommate-card">
+                <div class="roommate-header">
+                    <i class="fas fa-user"></i>
+                    <h4 class="roommate-name">PHẠM THỊ D</h4>
+                </div>
+                <div class="info-line">
+                    <label>Mã Sinh Viên:</label>
+                    <span>22H113009</span>
+                </div>
+                <div class="info-line">
+                    <label>Số Điện Thoại:</label>
+                    <span class="contact-data">0912 345 678</span>
+                </div>
+                <div class="info-line">
+                    <label>Email:</label>
+                    <span class="contact-data">thid.22h@sv.edu.vn</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

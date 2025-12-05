@@ -1,0 +1,144 @@
+﻿<!-- Header Start -->
+<div class="container-fluid bg-primary py-5 mb-5 page-header">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <h1 class="display-3 text-white animated slideInDown">Yêu Cầu & Đăng Ký Dịch Vụ</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a class="text-white" href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a class="text-white" href="#">Yêu Cầu & Đăng Ký Dịch Vụ</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+<div class="service-request-container">
+    <div class="tab-navigation">
+        <button class="tab-link active" onclick="openTab(event, 'repair-request')">1. Yêu Cầu Sửa Chữa</button>
+        <button class="tab-link" onclick="openTab(event, 'leave-request')">2. Đơn Xin Nghỉ Phép</button>
+        <button class="tab-link" onclick="openTab(event, 'service-registration')">3. Đăng Ký Dịch Vụ</button>
+        <button class="tab-link" onclick="openTab(event, 'request-status')">4. Trạng Thái Yêu Cầu</button>
+    </div>
+
+    <div id="repair-request" class="tab-content active-tab">
+        <h3>Gửi Phiếu Yêu Cầu Sửa Chữa</h3>
+        <form class="request-form" onsubmit="submitRequest(event, 'Sửa chữa')">
+            <div class="form-group">
+                <label for="roomInfo">Phòng/Vị trí:</label>
+                <input type="text" id="roomInfo" value="Nhà H3 - Phòng 305" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="repairType">Phân loại sự cố (*):</label>
+                <select id="repairType" required>
+                    <option value="">-- Chọn loại sự cố --</option>
+                    <option value="Điện">Hệ thống Điện/Ổ cắm</option>
+                    <option value="Nước">Hệ thống Nước/Vòi/Ống</option>
+                    <option value="Nội thất">Bàn ghế/Giường tủ/Cửa</option>
+                    <option value="Khác">Sự cố khác</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Mô tả chi tiết (*):</label>
+                <textarea id="description" rows="4" placeholder="Mô tả chi tiết sự cố và vị trí xảy ra." required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="attachment">Hình ảnh đính kèm (Tùy chọn):</label>
+                <input type="file" id="attachment" accept="image/*">
+            </div>
+
+            <button type="submit" class="submit-btn">Gửi Yêu Cầu Sửa Chữa</button>
+        </form>
+    </div>
+
+    <div id="leave-request" class="tab-content">
+        <h3>Gửi Đơn Xin Nghỉ Phép Vắng Mặt</h3>
+        <form class="request-form" onsubmit="submitRequest(event, 'Nghỉ phép')">
+            <div class="form-group">
+                <label for="leaveReason">Lý do nghỉ phép (*):</label>
+                <input type="text" id="leaveReason" required placeholder="Ví dụ: Về quê, đi thực tập,...">
+            </div>
+
+            <div class="form-group grid-2-col">
+                <div>
+                    <label for="startDate">Ngày bắt đầu vắng mặt (*):</label>
+                    <input type="date" id="startDate" required>
+                </div>
+                <div>
+                    <label for="endDate">Ngày quay lại dự kiến (*):</label>
+                    <input type="date" id="endDate" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="emergencyContact">Liên hệ khẩn cấp ngoài KTX (*):</label>
+                <input type="text" id="emergencyContact" required placeholder="Tên và SĐT của người thân">
+            </div>
+
+            <button type="submit" class="submit-btn">Gửi Đơn Xin Nghỉ Phép</button>
+        </form>
+    </div>
+
+    <div id="service-registration" class="tab-content">
+        <h3>Đăng Ký Các Dịch Vụ Bổ Sung</h3>
+        <div class="service-list">
+            <div class="service-item">
+                <h4>Thuê Tủ Lạnh Nhỏ</h4>
+                <p>Phí thuê: 100.000 VNĐ/tháng. Đã bao gồm chi phí điện năng tiêu thụ.</p>
+                <button class="register-btn" onclick="registerService('Tủ lạnh')">Đăng Ký</button>
+            </div>
+            <div class="service-item">
+                <h4>Đăng Ký Chỗ Gửi Xe Máy</h4>
+                <p>Phí: 50.000 VNĐ/tháng. Cần cung cấp biển số xe khi đăng ký.</p>
+                <button class="register-btn registered" onclick="registerService('Gửi xe')">Đã Đăng Ký</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="request-status" class="tab-content">
+        <h3>Theo Dõi Trạng Thái Yêu Cầu</h3>
+        <table class="status-table">
+            <thead>
+                <tr>
+                    <th>Mã Yêu Cầu</th>
+                    <th>Loại</th>
+                    <th>Thời gian gửi</th>
+                    <th>Mô tả/Nội dung</th>
+                    <th>Trạng thái</th>
+                    <th>Cập nhật gần nhất</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>RQ00101</td>
+                    <td>Sửa chữa (Điện)</td>
+                    <td>01/12 10:30</td>
+                    <td>Hỏng công tắc đèn phòng vệ sinh</td>
+                    <td class="status-processing">Đang xử lý</td>
+                    <td>01/12 14:00 (Đã phân công)</td>
+                </tr>
+                <tr>
+                    <td>LV00055</td>
+                    <td>Nghỉ phép</td>
+                    <td>25/11 18:00</td>
+                    <td>Về quê 3 ngày (26/11 - 29/11)</td>
+                    <td class="status-completed">Đã hoàn thành</td>
+                    <td>25/11 20:00 (Đã duyệt)</td>
+                </tr>
+                <tr>
+                    <td>RQ00100</td>
+                    <td>Sửa chữa (Nước)</td>
+                    <td>20/11 08:00</td>
+                    <td>Rò rỉ nước ở bồn rửa mặt</td>
+                    <td class="status-pending">Đã gửi</td>
+                    <td>20/11 08:00 (Chờ tiếp nhận)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

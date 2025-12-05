@@ -24,4 +24,13 @@ public partial class TblAccount
     public DateTime CreatedDate { get; set; }
 
     public string? Status { get; set; }
+
+
+    
+
+    public virtual ICollection<TblStudents> TblStudents { get; set; } = new List<TblStudents>();
+
+
+    
+
 }

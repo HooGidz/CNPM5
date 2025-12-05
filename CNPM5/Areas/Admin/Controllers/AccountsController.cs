@@ -22,6 +22,7 @@ namespace CNPM5.Areas.Admin.Controllers
         // GET: Admin/Accounts
         public async Task<IActionResult> Index()
         {
+            
             return View(await _context.TblAccounts.ToListAsync());
         }
 
@@ -46,7 +47,11 @@ namespace CNPM5.Areas.Admin.Controllers
         // GET: Admin/Accounts/Create
         public IActionResult Create()
         {
+<<<<<<< HEAD
            // ViewBag.RoleId = new SelectList(_context.TblRoles, "RoleId", "RoleName");
+=======
+            ViewData["RoleId"] = new SelectList(_context.TblRoles, "RoleId", "RoleName");
+>>>>>>> 349c052ffd8c3acf4d44a8afe9da110c3781c1d0
             return View();
         }
 
@@ -57,14 +62,23 @@ namespace CNPM5.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AccountId,Username,Password,FullName,Phone,Email,RoleId,LastLogin,CreatedDate,Status")] TblAccount tblAccount)
         {
+          
             if (ModelState.IsValid)
             {
+<<<<<<< HEAD
                 tblAccount.Username = CNPM5.Utilities.Function.TitleSlugGenerationAlias(tblAccount.Username);
                 _context.Add(tblAccount);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             //ViewBag.RoleId = new SelectList(_context.TblRoles, "RoleId", "RoleName", tblAccount.RoleId);
+=======
+            _context.Add(tblAccount);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+            }
+            
+>>>>>>> 349c052ffd8c3acf4d44a8afe9da110c3781c1d0
             return View(tblAccount);
             //return View("Index", await _context.TblAccounts.ToListAsync());
         }
@@ -82,6 +96,7 @@ namespace CNPM5.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            ViewData["RoleId"] = new SelectList(_context.TblRoles, "RoleId", "RoleName", tblAccount.RoleId);
             return View(tblAccount);
         }
 
@@ -117,6 +132,7 @@ namespace CNPM5.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["RoleId"] = new SelectList(_context.TblRoles, "RoleId", "RoleName", tblAccount.RoleId);
             return View(tblAccount);
         }
 

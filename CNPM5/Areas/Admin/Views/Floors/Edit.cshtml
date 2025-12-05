@@ -1,0 +1,46 @@
+﻿@model CNPM5.Models.TblFloor
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Sửa thông tin tầng</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4 card-body">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="FloorId" />
+            <div class="form-group">
+                <div class="mb-3 row">
+                    <label asp-for="BuildingId" for="html5-text-input" class="col-md-2 col-form-label">Tên toà nhà</label>
+                    <div class="col-md-10">
+                        <select asp-for="BuildingId" class="form-control" asp-items="ViewBag.BuildingId"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="mb-3 row">
+                    <label asp-for="FloorNumber" for="html5-text-input" class="col-md-2 col-form-label">Tên tầng</label>
+                    <div class="col-md-10">
+                        <input asp-for="FloorNumber" class="form-control" type="text" id="html5-text-input">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Xác nhận" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" style="margin-left: 10px;">
+        <button type="button" class="btn btn-dark">Quay lại</button>
+    </a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

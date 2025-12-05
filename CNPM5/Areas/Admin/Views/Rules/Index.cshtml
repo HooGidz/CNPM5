@@ -1,0 +1,74 @@
+﻿@model IEnumerable<CNPM5.Models.Rule>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Quản lý nội quy</h1>
+
+<p>
+    <a asp-action="Create">
+        <button type="button" class="btn btn-primary">
+            <span class="tf-icons bx bx-plus"></span>&nbsp; Thêm mới
+        </button>
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tên nội quy</th>
+            <th>Mô tả nội quy</th>
+            <th>Mức phạt</th>
+            <th>Ngày hiệu lực</th>
+            <th>Trạng thái</th>
+            <th>Người tạo</th>
+            <th>Ngày tạo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 1;
+        }
+        @if (Model != null){
+            @foreach(var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RuleName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Penalty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EffectiveDate)
+                    </td>
+                    <td>
+                        <span class="badge bg-label-primary me-1">@Html.DisplayFor(modelItem => item.Status)</span>
+                    </td>
+                    <td>
+                        @(item.Account?.FullName ?? "Không rõ người tạo")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.RuleId"><i class="bx bx-edit-alt me-1"></i> Sửa</a>
+                                <a class="dropdown-item" asp-action="Details" asp-route-id="@item.RuleId"><i class="bx bx-edit-alt me-1"></i> Chi tiết</a>
+                                <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.RuleId"><i class="bx bx-trash me-1"></i> Xoá</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    
+    </tbody>
+</table>

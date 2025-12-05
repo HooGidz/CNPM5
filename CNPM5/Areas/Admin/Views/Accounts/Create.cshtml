@@ -6,6 +6,7 @@
 }
 
 <h1>Thêm tài khoản</h1>
+<<<<<<< HEAD
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -35,29 +36,95 @@
                 <label asp-for="Email" class="control-label">Email</label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
+=======
+
+<hr />
+<div class="row">
+    <div class="col-md-4 card-body">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <div class="mb-3 row">
+                    <label asp-for="Username" for="html5-text-input" class="col-md-2 col-form-label">Tên tài khoản</label>
+                    <div class="col-md-10">
+                        <input asp-for="Username" class="form-control" type="text" id="html5-text-input">
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <label asp-for="LastLogin" class="control-label"></label>
-                <input asp-for="LastLogin" class="form-control" />
-                <span asp-validation-for="LastLogin" class="text-danger"></span>
+                <div class="mb-3 row">
+                    <label asp-for="Password" for="html5-text-input" class="col-md-2 col-form-label">Mật khẩu</label>
+                    <div class="col-md-10">
+                        <input asp-for="Password" class="form-control" type="text" id="html5-text-input">
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
+                <div class="mb-3 row">
+                    <label asp-for="FullName" for="html5-text-input" class="col-md-2 col-form-label">Họ và tên</label>
+                    <div class="col-md-10">
+                        <input asp-for="FullName" class="form-control" type="text" id="html5-text-input">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="mb-3 row">
+                    <label asp-for="Phone" for="html5-text-input" class="col-md-2 col-form-label">Số điện thoại</label>
+                    <div class="col-md-10">
+                        <input asp-for="Phone" class="form-control" type="text" id="html5-text-input">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="mb-3 row">
+                    <label asp-for="Email" for="html5-text-input" class="col-md-2 col-form-label">Email</label>
+                    <div class="col-md-10">
+                        <input asp-for="Email" class="form-control" type="text" id="html5-text-input">
+                    </div>
+                </div>
+>>>>>>> 349c052ffd8c3acf4d44a8afe9da110c3781c1d0
+            </div>
+            <div class="form-group">
+                <div class="mb-3 row">
+                    <label asp-for="RoleId" for="html5-text-input" class="col-md-2 col-form-label">Phân quyền</label>
+                    <div class="col-md-10">
+                        <select asp-for="RoleId" asp-items="ViewBag.RoleId" class="form-select" id="exampleFormControlSelect1" aria-label="Default select example"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="mb-3 row">
+                    <label asp-for="Status" for="html5-text-input" class="col-md-2 col-form-label">Trạng thái</label>
+                    <div class="col-md-10">
+                        <input asp-for="Status" class="form-control" type="text" id="html5-text-input">
+                    </div>
+                </div>
             </div>
             
             <div class="form-group">
+<<<<<<< HEAD
                 <input type="submit" value="Lưu" class="btn btn-primary" />
+=======
+                <input type="submit" value="Thêm" class="btn btn-primary" />
+>>>>>>> 349c052ffd8c3acf4d44a8afe9da110c3781c1d0
             </div>
         </form>
     </div>
 </div>
 
 <div>
+<<<<<<< HEAD
     <a asp-action="Index">Quay lại</a>
+=======
+    <a asp-action="Index" style="margin-left: 10px;">
+        <button type="button" class="btn btn-dark">Quay lại</button>
+    </a>
+>>>>>>> 349c052ffd8c3acf4d44a8afe9da110c3781c1d0
 </div>
 
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
