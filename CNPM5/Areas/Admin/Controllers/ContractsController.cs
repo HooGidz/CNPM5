@@ -26,7 +26,7 @@ namespace CNPM5.Areas.Admin.Controllers
                 .Include(v=>v.Student)
                 .Include(v=>v.Room)
                 .Include(v=>v.Service)
-                .Include(v=>v.Account)
+                
                 .ToListAsync());
         }
 
@@ -39,7 +39,7 @@ namespace CNPM5.Areas.Admin.Controllers
             }
 
             var contract = await _context.Contracts.Include(v => v.Student)
-                .Include(v => v.Room).Include(v => v.Service).Include(v => v.Account)
+                .Include(v => v.Room).Include(v => v.Service)
                 .FirstOrDefaultAsync(m => m.ContractId == id);
             if (contract == null)
             {
@@ -52,10 +52,10 @@ namespace CNPM5.Areas.Admin.Controllers
         // GET: Admin/Contracts/Create
         public IActionResult Create()
         {
-            ViewData["StudentId"] = new SelectList(_context.TblStudents.OrderBy(s => s.FullName).ToList(), "StudentId", "FullName");
+            ViewData["StudentId"] = new SelectList(_context.TblStudentss.OrderBy(s => s.FullName).ToList(), "StudentId", "FullName");
             ViewData["RoomId"] = new SelectList(_context.TblRooms.OrderBy(r => r.RoomName).ToList(), "RoomId", "RoomName");
             ViewData["ServiceId"] = new SelectList(_context.TblServices.OrderBy(r => r.Name).ToList(), "ServiceId", "Name");
-            ViewData["AccountId"] = new SelectList(_context.TblAccounts.OrderBy(s => s.FullName).ToList(), "AccountId", "FullName");
+            
             return View(new Contract());
         }
 
@@ -64,14 +64,14 @@ namespace CNPM5.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ContractId,StudentId,RoomId,ServiceId,StartDate,EndDate,Deposit,MonthlyFee,Cycle,Harvestday,Status,AccountId,CreatedDate")] Contract contract)
+        public async Task<IActionResult> Create([Bind("ContractId,StudentId,RoomId,ServiceId,StartDate,EndDate,Deposit,MonthlyFee,Cycle,Harvestday,Status,CreatedDate,CreatedBy")] Contract contract)
         {
             if (ModelState.IsValid)
             {
-                ViewData["StudentId"] = new SelectList(_context.TblStudents.OrderBy(s => s.FullName).ToList(), "StudentId", "FullName", contract.StudentId);
+                ViewData["StudentId"] = new SelectList(_context.TblStudentss.OrderBy(s => s.FullName).ToList(), "StudentId", "FullName", contract.StudentId);
                 ViewData["RoomId"] = new SelectList(_context.TblRooms.OrderBy(r => r.RoomName).ToList(), "RoomId", "RoomName", contract.RoomId);
                 ViewData["ServiceId"] = new SelectList(_context.TblServices.OrderBy(r => r.Name).ToList(), "ServiceId", "Name", contract.ServiceId);
-                ViewData["AccountId"] = new SelectList(_context.TblAccounts.OrderBy(s => s.FullName).ToList(), "AccountId", "FullName",contract.AccountId);
+                
                 return View(contract);
                 
             }
@@ -94,10 +94,10 @@ namespace CNPM5.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["StudentId"] = new SelectList(_context.TblStudents.OrderBy(s => s.FullName).ToList(), "StudentId", "FullName", contract.StudentId);
+            ViewData["StudentId"] = new SelectList(_context.TblStudentss.OrderBy(s => s.FullName).ToList(), "StudentId", "FullName", contract.StudentId);
             ViewData["RoomId"] = new SelectList(_context.TblRooms.OrderBy(r => r.RoomName).ToList(), "RoomId", "RoomName", contract.RoomId);
             ViewData["ServiceId"] = new SelectList(_context.TblServices.OrderBy(r => r.Name).ToList(), "ServiceId", "Name", contract.ServiceId);
-            ViewData["AccountId"] = new SelectList(_context.TblAccounts.OrderBy(s => s.FullName).ToList(), "AccountId", "FullName", contract.AccountId);
+            
             return View(contract);
         }
 
@@ -106,7 +106,7 @@ namespace CNPM5.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ContractId,StudentId,RoomId,ServiceId,StartDate,EndDate,Deposit,MonthlyFee,Cycle,Harvestday,Status,Account,CreatedDate")] Contract contract)
+        public async Task<IActionResult> Edit(int id, [Bind("ContractId,StudentId,RoomId,ServiceId,StartDate,EndDate,Deposit,MonthlyFee,Cycle,Harvestday,Status,CreatedDate,CreatedBy")] Contract contract)
         {
             if (id != contract.ContractId)
             {
@@ -115,10 +115,10 @@ namespace CNPM5.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                ViewData["StudentId"] = new SelectList(_context.TblStudents.OrderBy(s => s.FullName).ToList(), "StudentId", "FullName", contract.StudentId);
+                ViewData["StudentId"] = new SelectList(_context.TblStudentss.OrderBy(s => s.FullName).ToList(), "StudentId", "FullName", contract.StudentId);
                 ViewData["RoomId"] = new SelectList(_context.TblRooms.OrderBy(r => r.RoomName).ToList(), "RoomId", "RoomName", contract.RoomId);
                 ViewData["ServiceId"] = new SelectList(_context.TblServices.OrderBy(r => r.Name).ToList(), "ServiceId", "Name", contract.ServiceId);
-                ViewData["AccountId"] = new SelectList(_context.TblAccounts.OrderBy(s => s.FullName).ToList(), "AccountId", "FullName", contract.AccountId);
+                
                 return View(contract); 
             }
                 try
@@ -154,7 +154,7 @@ namespace CNPM5.Areas.Admin.Controllers
                 .Include(v => v.Student)
                 .Include(v => v.Room)
                 .Include(v => v.Service)
-                .Include(v => v.Account)
+                
                 .FirstOrDefaultAsync(m => m.ContractId == id);
             if (contract == null)
             {

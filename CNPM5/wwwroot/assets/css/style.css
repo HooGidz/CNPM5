@@ -1,4 +1,4 @@
-/********** Template CSS **********/
+﻿/********** Template CSS **********/
 :root {
     --primary: #06BBCC;
     --light: #F0FBFC;
@@ -431,4 +431,56 @@
     margin-right: 0;
     padding-right: 0;
     border-right: none;
+}
+/*********************ĐĂNG NHẬP************************/
+.login-center {
+    min-height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    width: 380px;
+    padding: 25px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+    .login-box h3 {
+        text-align: center;
+        margin-bottom: 25px;
+        font-weight: 600;
+    }
+/***********************ĐĂNG KÝ**********************************/
+.register-center {
+    min-height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-box {
+    width: 420px;
+    padding: 25px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+    .register-box h3 {
+        text-align: center;
+        margin-bottom: 25px;
+        font-weight: 600;
+    }
+
+.form-control {
+    height: 45px;
+}
+
+.btn-register {
+    height: 45px;
+    font-size: 16px;
+    font-weight: 500;
 }

@@ -18,6 +18,4 @@ public partial class TblService
     public DateTime? UpdatedAt { get; set; }
 
     public virtual ICollection<TblServiceUsage> TblServiceUsages { get; set; } = new List<TblServiceUsage>();
-
-    
 }

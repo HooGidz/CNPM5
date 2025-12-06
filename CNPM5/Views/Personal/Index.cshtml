@@ -1,4 +1,7 @@
-﻿@{
+﻿@model CNPM5.Models.TblStudents
+@{
+    ViewData["Title"] = "Index";
+    <!--Layout = "~/Areas/Views/Personal/Index.cshtml";-->
 }
 
 <!-- Header Start -->
@@ -21,12 +24,12 @@
 <div class="profile-container">
     <div class="profile-header">
         <div class="avatar-wrapper">
-			<img src="~/assets/img/team-1.jpg" alt="Ảnh đại diện" class="profile-avatar">
+			<img src="@Model.AvatarUrl" alt="Ảnh đại diện" class="profile-avatar">
 			<div class="status-badge active">Đang ở</div>
         </div>
 		
-        <h2 style="color:#ffff;" class="student-name">NGUYỄN VĂN A</h2>
-        <p class="student-code">MSSV: 21H112001</p>
+        <h2 style="color:#ffff;" class="student-name">@Model.FullName</h2>
+        <p class="student-code">@Model.StudentCode</p>
     </div>
 
     <button class="edit-toggle-btn" onclick="toggleEditMode()">
@@ -38,34 +41,36 @@
 
         <div class="display-mode">
             <div class="info-grid">
-                <div><label>Họ và Tên:</label><p>NGUYỄN VĂN A</p></div>
-                <div><label>Mã Sinh Viên:</label><p>21H112001</p></div>
-                <div><label>Ngày sinh:</label><p>20/10/2003</p></div>
-                <div><label>Giới tính:</label><p>Nam</p></div>
+                <div><label>Họ và Tên:</label><p>@Model.FullName</p></div>
+                <div><label>Mã Sinh Viên:</label><p>@Model.StudentCode</p></div>
+                <div><label>Ngày sinh:</label><p>@Model.BirthDate</p></div>
+                <div><label>Giới tính:</label><p>@Model.Gender</p></div>
             </div>
         </div>
 
         <div class="edit-mode hidden">
             <form id="personal-edit-form">
 				<div class="info-grid">
-                    <div>
-                        <label for="fullName">Họ và Tên</label>
-                        <input  type="text" id="fullName" value="NGUYỄN VĂN A" required>
-                    </div>
-                    <div>
-                        <label for="studentCode">Mã Sinh Viên (Không sửa)</label>
-                        <input type="text" id="studentCode" value="21H112001" readonly>
-                    </div>
-                    <div>
-                        <label for="birthDate">Ngày sinh</label>
-                        <input type="date" id="birthDate" value="2003-10-20" required>
-                    </div>
-                    <div>
-                        <label for="gender">Giới tính</label>
-                        <select id="gender">
-                            <option value="Nam">Nam</option>
-                            <option value="Nữ">Nữ</option>
-                        </select>
+                    <div class="info-grid">
+                        <div>
+                            <label for="fullName">Họ và Tên</label>
+                            <input type="text" id="fullName" value="@Model.FullName" required>
+                        </div>
+                        <div>
+                            <label for="studentCode">Mã Sinh Viên (Không sửa)</label>
+                            <input type="text" id="studentCode" value="@Model.StudentCode" readonly>
+                        </div>
+                        <div>
+                            <label for="birthDate">Ngày sinh</label>
+                            <input type="date" id="birthDate" value="@Model.BirthDate?.ToString("yyyy-MM-dd")">
+                        </div>
+                        <div>
+                            <label for="gender">Giới tính</label>
+                            <select id="gender">
+                                <option value="Nam" selected="@(Model.Gender == "Nam")">Nam</option>
+                                <option value="Nữ" selected="@(Model.Gender == "Nữ")">Nữ</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
@@ -73,19 +78,19 @@
                 <div class="info-grid">
                     <div>
                         <label for="phone">Điện thoại</label>
-                        <input type="tel" id="phone" value="0987 654 321">
+                        <input type="tel" id="phone" value="@Model.Phone">
                     </div>
                     <div>
                         <label for="email">Email</label>
-                        <input type="email" id="email" value="vana.21h@sv.edu.vn">
+                        <input type="email" id="email" value="@Model.Email">
                     </div>
                     <div class="full-width">
                         <label for="pAddress">Địa chỉ Thường trú</label>
-                        <input type="text" id="pAddress" value="Số 1, Phường X, Quận Y" required>
+                        <input type="text" id="pAddress" value="@Model.PermanentAddress" required>
                     </div>
                     <div class="full-width">
                         <label for="tAddress">Địa chỉ Tạm trú</label>
-                        <input type="text" id="tAddress" value="Số 5, KTX Nhà H3" required>
+                        <input type="text" id="tAddress" value="@Model.TemporaryAddress" required>
                     </div>
                 </div>
 
@@ -93,15 +98,15 @@
                 <div class="info-grid">
                     <div>
                         <label for="faculty">Khoa</label>
-                        <input type="text" id="faculty" value="Công nghệ thông tin">
+                        <input type="text" id="faculty" value="@Model.Faculty">
                     </div>
                     <div>
                         <label for="major">Ngành</label>
-                        <input type="text" id="major" value="Kỹ thuật phần mềm">
+                        <input type="text" id="major" value="@Model.Major">
                     </div>
                     <div>
                         <label for="citizenID">CCCD/CMND</label>
-                        <input type="text" id="citizenID" value="012345678901">
+                        <input type="text" id="citizenID" value="@Model.CitizenId">
                     </div>
                     <div>
                         <label for="accountID">Tài khoản (ID)</label>

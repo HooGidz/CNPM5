@@ -25,6 +25,9 @@ public partial class Cnpm5Context : DbContext
 
     public virtual DbSet<TblFloor> TblFloors { get; set; }
 
+    public virtual DbSet<TblLogin> TblLogins { get; set; }
+
+    public virtual DbSet<TblRegulation> TblRegulations { get; set; }
 
     public virtual DbSet<TblRole> TblRoles { get; set; }
 
@@ -34,21 +37,13 @@ public partial class Cnpm5Context : DbContext
 
     public virtual DbSet<TblServiceUsage> TblServiceUsages { get; set; }
 
-
-    public virtual DbSet<TblStudents> TblStudents { get; set; }
+    public virtual DbSet<TblStudents> TblStudentss { get; set; }
 
     public virtual DbSet<Violation> Violations { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=LAPTOP-SFNTDCJC\\ANHTAI;Initial Catalog=CNPM5;Integrated Security=True;TrustServerCertificate=True;");
-
-
-    //    protected override void onconfiguring(dbcontextoptionsbuilder optionsbuilder)
-    //#warning to protect potentially sensitive information in your connection string, you should move it out of source code. you can avoid scaffolding the connection string by using the name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. for more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?linkid=723263.
-    //        => optionsbuilder.usesqlserver("data source=desktop-l7hk7re;initial catalog=cnpm5;integrated security=true;trustservercertificate=true;");
-    //        => optionsBuilder.UseSqlServer("Data Source= LAPTOP-SFNTDCJC\\ANHTAI;Initial Catalog=CNPM5;Integrated Security=True;TrustServerCertificate=True;");
-
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -64,28 +59,6 @@ public partial class Cnpm5Context : DbContext
             entity.Property(e => e.MonthlyFee).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.Status).HasMaxLength(50);
         });
-        modelBuilder.Entity<Contract>()
-            .HasOne(c => c.Student)
-            .WithMany()
-            .HasForeignKey(c => c.StudentId)
-            .OnDelete(DeleteBehavior.ClientSetNull);
-
-        modelBuilder.Entity<Contract>()
-            .HasOne(c => c.Room)
-            .WithMany()
-            .HasForeignKey(c => c.RoomId)
-            .OnDelete(DeleteBehavior.ClientSetNull);
-
-        modelBuilder.Entity<Contract>()
-            .HasOne(c => c.Service)
-            .WithMany()
-            .HasForeignKey(c => c.ServiceId)
-            .OnDelete(DeleteBehavior.ClientSetNull);
-        modelBuilder.Entity<Contract>()
-            .HasOne(c => c.Account)
-            .WithMany()
-            .HasForeignKey(c => c.AccountId);
-
 
         modelBuilder.Entity<Rule>(entity =>
         {
@@ -148,6 +121,50 @@ public partial class Cnpm5Context : DbContext
                 .HasConstraintName("FK__tblFloors__Build__6CD828CA");
         });
 
+        modelBuilder.Entity<TblLogin>(entity =>
+        {
+            entity.HasKey(e => e.LoginId).HasName("PK__tblLogin__4DDA2818462BD9C0");
+
+            entity.ToTable("tblLogin");
+
+            entity.HasIndex(e => e.Username, "UQ__tblLogin__536C85E4A5803B8E").IsUnique();
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Password).HasMaxLength(255);
+            entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
+            entity.Property(e => e.Username).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<TblRegulation>(entity =>
+        {
+            entity.HasKey(e => e.RegulationId).HasName("PK__tblRegul__A192C7E933A07B58");
+
+            entity.ToTable("tblRegulations");
+
+            entity.HasIndex(e => e.RegulationCode, "UQ__tblRegul__26C51AA7A4CE0BC8").IsUnique();
+
+            entity.Property(e => e.Category).HasMaxLength(100);
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(1000);
+            entity.Property(e => e.EffectiveDate).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.FineAmount)
+                .HasDefaultValue(0m)
+                .HasColumnType("decimal(12, 2)");
+            entity.Property(e => e.PenaltyPoints).HasDefaultValue(0);
+            entity.Property(e => e.RegulationCode).HasMaxLength(20);
+            entity.Property(e => e.Status)
+                .HasMaxLength(20)
+                .HasDefaultValue("Active");
+            entity.Property(e => e.Title).HasMaxLength(200);
+
+            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.TblRegulations)
+                .HasForeignKey(d => d.CreatedBy)
+                .HasConstraintName("FK__tblRegula__Creat__151B244E");
+        });
 
         modelBuilder.Entity<TblRole>(entity =>
         {
@@ -178,11 +195,8 @@ public partial class Cnpm5Context : DbContext
             entity.HasOne(d => d.Floor).WithMany(p => p.TblRooms)
                 .HasForeignKey(d => d.FloorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-
-                .HasConstraintName("FK__Rooms__FloorId__60A75C0F");
+                .HasConstraintName("FK__tblRooms__FloorI__73852659");
         });
-
-
 
         modelBuilder.Entity<TblService>(entity =>
         {
@@ -253,11 +267,8 @@ public partial class Cnpm5Context : DbContext
 
             entity.HasOne(d => d.Account).WithMany(p => p.TblStudents)
                 .HasForeignKey(d => d.AccountId)
-
-                .HasConstraintName("FK__tblStuden__Accou__6754599E");
+                .HasConstraintName("FK__tblStuden__Accou__534D60F1");
         });
-
-
 
         modelBuilder.Entity<Violation>(entity =>
         {

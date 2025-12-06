@@ -22,7 +22,7 @@ namespace CNPM5.Areas.Admin.Controllers
         // GET: Admin/Students
         public async Task<IActionResult> Index()
         {
-            var cnpm5Context = _context.TblStudents.Include(t => t.Account);
+            var cnpm5Context = _context.TblStudentss.Include(t => t.Account);
             return View(await cnpm5Context.ToListAsync());
         }
 
@@ -34,7 +34,7 @@ namespace CNPM5.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var tblStudent = await _context.TblStudents
+            var tblStudent = await _context.TblStudentss
                 .Include(t => t.Account)
                 .FirstOrDefaultAsync(m => m.StudentId == id);
             if (tblStudent == null)
@@ -75,7 +75,7 @@ namespace CNPM5.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var tblStudent = await _context.TblStudents.FindAsync(id);
+            var tblStudent = await _context.TblStudentss.FindAsync(id);
             if (tblStudent == null)
             {
                 return NotFound();
@@ -128,7 +128,7 @@ namespace CNPM5.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var tblStudent = await _context.TblStudents
+            var tblStudent = await _context.TblStudentss
                 .Include(t => t.Account)
                 .FirstOrDefaultAsync(m => m.StudentId == id);
             if (tblStudent == null)
@@ -144,10 +144,10 @@ namespace CNPM5.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tblStudent = await _context.TblStudents.FindAsync(id);
+            var tblStudent = await _context.TblStudentss.FindAsync(id);
             if (tblStudent != null)
             {
-                _context.TblStudents.Remove(tblStudent);
+                _context.TblStudentss.Remove(tblStudent);
             }
 
             await _context.SaveChangesAsync();
@@ -156,7 +156,7 @@ namespace CNPM5.Areas.Admin.Controllers
 
         private bool TblStudentExists(int id)
         {
-            return _context.TblStudents.Any(e => e.StudentId == id);
+            return _context.TblStudentss.Any(e => e.StudentId == id);
         }
     }
 }

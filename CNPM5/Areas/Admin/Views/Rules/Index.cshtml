@@ -49,7 +49,7 @@
                         <span class="badge bg-label-primary me-1">@Html.DisplayFor(modelItem => item.Status)</span>
                     </td>
                     <td>
-                        @(item.Account?.FullName ?? "Không rõ người tạo")
+                        @Html.DisplayFor(modelItem => item.CreatedBy)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.CreatedDate)

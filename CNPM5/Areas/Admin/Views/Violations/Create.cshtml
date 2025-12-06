@@ -20,7 +20,7 @@
                 <span asp-validation-for="StudentId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RuleId">Nội quy</label>
+                <label asp-for="RuleId">Nội quy vi phạm</label>
                 <select asp-for="RuleId" asp-items="@(ViewData["RuleId"] as SelectList)" class="form-control">
                     <option value="">--- Chọn Nội quy ---</option>
                 </select>

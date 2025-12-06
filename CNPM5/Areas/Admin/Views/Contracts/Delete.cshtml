@@ -61,11 +61,13 @@
                 <input asp-for="Status" class="form-control" />
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label class="control-label">Người tạo</label>
-                <input type="text" class="form-control" value="@Model.Account.FullName" readonly />
-            </div>
-            
+
+                <div class="form-group">
+                    <label asp-for="CreatedBy" class="control-label">Người tạo</label>
+                    <input asp-for="CreatedBy" class="form-control" />
+                    <span asp-validation-for="CreatedBy" class="text-danger"></span>
+
+                </div>
         </form>
     </div>
 </div>

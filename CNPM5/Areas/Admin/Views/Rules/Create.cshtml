@@ -10,8 +10,8 @@
 <hr />
 <div class="row">
     <div class="col-md-4 card-body">
-        <form asp-action="Create" method="post">
-            @Html.AntiForgeryToken()
+        <form asp-action="Create" >
+            
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="RuleName" class="control-label">Tên nội quy</label>
@@ -34,11 +34,9 @@
                 <span asp-validation-for="EffectiveDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AccountId">Người tạo</label>
-                <select asp-for="AccountId" asp-items="@(ViewData["AccountId"] as SelectList)" class="form-control">
-                    <option value="">--- Chọn người tạo ---</option>
-                </select>
-                <span asp-validation-for="AccountId" class="text-danger"></span>
+                <label asp-for="CreatedBy" class="control-label">Người tạo</label>
+                <input asp-for="CreatedBy" class="form-control" />
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Thêm" class="btn btn-primary" />

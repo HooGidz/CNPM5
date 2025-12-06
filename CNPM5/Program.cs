@@ -12,6 +12,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddDbContext<Cnpm5Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Thêm session
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -22,6 +24,8 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+// Kích ho?t session
+app.UseSession();
 
 app.UseHttpsRedirection();
 app.UseRouting();

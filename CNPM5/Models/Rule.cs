@@ -17,11 +17,11 @@ public partial class Rule
 
     public string? Status { get; set; }
 
-    public int AccountId { get; set; }
+    public String CreatedBy { get; set; }
 
     public DateTime? CreatedDate { get; set; }
 
-    public virtual TblAccount Account { get; set; }
+   
 
     public virtual ICollection<Violation> Violations { get; set; } = new List<Violation>();
 }

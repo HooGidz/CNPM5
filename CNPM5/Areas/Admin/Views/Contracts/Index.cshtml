@@ -49,10 +49,10 @@
                 Trạng thái
             </th>
             <th>
-                Người tạo
+                Ngày tạo
             </th>
             <th>
-                Ngày tạo
+                Người tạo
             </th>
             
         </tr>
@@ -95,10 +95,10 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                    @(item.Account?.FullName ?? "Không rõ người tạo")
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
+                 @Html.DisplayFor(modelItem => item.CreatedBy)
             </td>
                 <td>
                     <div class="dropdown">

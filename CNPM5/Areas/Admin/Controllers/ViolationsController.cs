@@ -54,7 +54,7 @@ namespace CNPM5.Areas.Admin.Controllers
         public IActionResult Create()
         {
             // load dropdowns
-            ViewData["StudentId"] = new SelectList(_context.TblStudents.OrderBy(s => s.FullName).ToList(), "StudentId", "FullName");
+            ViewData["StudentId"] = new SelectList(_context.TblStudentss.OrderBy(s => s.FullName).ToList(), "StudentId", "FullName");
             ViewData["RuleId"] = new SelectList(_context.Rules.OrderBy(r => r.RuleName).ToList(), "RuleId", "RuleName");
 
             // trả View với model rỗng
@@ -74,7 +74,7 @@ namespace CNPM5.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 //trả lại view khi dữ liệu lỗi
-                ViewData["StudentId"] = new SelectList(_context.TblStudents.OrderBy(s => s.FullName).ToList(), "StudentId", "FullName", violation.StudentId);
+                ViewData["StudentId"] = new SelectList(_context.TblStudentss.OrderBy(s => s.FullName).ToList(), "StudentId", "FullName", violation.StudentId);
                 ViewData["RuleId"] = new SelectList(_context.Rules.OrderBy(r => r.RuleName).ToList(), "RuleId", "RuleName", violation.RuleId);
                 return View(violation);
                 //violation.ViolationDate = DateTime.Now;
@@ -105,7 +105,7 @@ namespace CNPM5.Areas.Admin.Controllers
                 return NotFound();
             }
             // Load dropdowns
-            ViewData["StudentId"] = new SelectList(_context.TblStudents.OrderBy(s => s.FullName).ToList(), "StudentId", "FullName", violation.StudentId);
+            ViewData["StudentId"] = new SelectList(_context.TblStudentss.OrderBy(s => s.FullName).ToList(), "StudentId", "FullName", violation.StudentId);
             ViewData["RuleId"] = new SelectList(_context.Rules.OrderBy(r => r.RuleName).ToList(), "RuleId", "RuleName", violation.RuleId);
 
             return View(violation);
@@ -126,7 +126,7 @@ namespace CNPM5.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 // Trả lại view nếu dữ liệu nhập sai
-                ViewData["StudentId"] = new SelectList(_context.TblStudents.OrderBy(s => s.FullName).ToList(), "StudentId", "FullName", violation.StudentId);
+                ViewData["StudentId"] = new SelectList(_context.TblStudentss.OrderBy(s => s.FullName).ToList(), "StudentId", "FullName", violation.StudentId);
                 ViewData["RuleId"] = new SelectList(_context.Rules.OrderBy(r => r.RuleName).ToList(), "RuleId", "RuleName", violation.RuleId);
                 return View(violation);
 

@@ -25,7 +25,5 @@ public partial class TblRoom
 
     public virtual TblFloor Floor { get; set; } = null!;
 
-   
-
     public virtual ICollection<TblServiceUsage> TblServiceUsages { get; set; } = new List<TblServiceUsage>();
 }

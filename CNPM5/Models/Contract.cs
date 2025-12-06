@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CNPM5.Models;
 
@@ -14,31 +13,26 @@ public partial class Contract
 
     public int ServiceId { get; set; }
 
-    public DateTime StartDate { get; set; }
-    public DateTime? EndDate { get; set; }
+    public DateOnly StartDate { get; set; }
+
+    public DateOnly? EndDate { get; set; }
 
     public decimal? Deposit { get; set; }
 
     public decimal MonthlyFee { get; set; }
 
-    public DateTime Cycle { get; set; }
-    public DateTime Harvestday { get; set; }
+    public DateOnly Cycle { get; set; }
+
+    public DateOnly Harvestday { get; set; }
 
     public string? Status { get; set; }
 
-    public int AccountId { get; set; }
+   
 
     public DateTime? CreatedDate { get; set; }
 
-    [ForeignKey("RoomId")]
+    public String? CreatedBy { get; set; }
     public virtual TblRoom Room { get; set; } = null!;
-
-    [ForeignKey("StudentId")]
+    public virtual TblService Service { get; set; } = null!;    
     public virtual TblStudents Student { get; set; } = null!;
-
-    [ForeignKey("ServiceId")]
-    public virtual TblService Service { get; set; } = null!;
-
-    [ForeignKey("AccountId")]
-    public virtual TblAccount? Account { get; set; }
 }
