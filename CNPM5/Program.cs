@@ -1,6 +1,8 @@
 using CNPM5.Models;
 using Microsoft.EntityFrameworkCore;
+
 using System.Globalization;
+
 
 var builder = WebApplication.CreateBuilder(args);
 var cultureInfo = new CultureInfo("en-US");
@@ -14,6 +16,7 @@ builder.Services.AddDbContext<Cnpm5Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 // Thêm session
 builder.Services.AddSession();
+
 
 var app = builder.Build();
 

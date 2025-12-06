@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="~/admin/assets/vendor/css/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="~/admin/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="~/admin/assets/css/demo.css" />
+    <link href="~/admin/assets/css/mycss.css" rel="stylesheet" />
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="~/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
@@ -122,16 +123,28 @@
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
-                    <li class="menu-item active">
-                        <a href="/Admin/Accounts/Index" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <li class="menu-item ">
+                        <a href="/Admin/Home" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-layout"></i>
+                            <div data-i18n="Analytics">Dashboard Quản Trị KTX</div>
+                        </a>
+                    </li>
+                    <li class="menu-item ">
+                        <a href="/Admin/Accounts" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-layout"></i>
                             <div data-i18n="Analytics">Quản lý tài khoản</div>
+                        </a>
+                    </li>
+                    <li class="menu-item ">
+                        <a href="/Admin/Roles" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-detail"></i>
+                            <div data-i18n="Analytics">Quản lý phân quyền</div>
                         </a>
                     </li>
 
                     <li class="menu-item">
                         <a href="/Admin/Floors" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <i class="menu-icon tf-icons bx bx-table"></i>
                             <div data-i18n="Analytics">Quản lý tầng</div>
                         </a>
                     </li>
@@ -143,25 +156,25 @@
                     </li>
                     <li class="menu-item ">
                         <a href="/Admin/Rooms" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
                             <div data-i18n="Analytics">Quản lý phòng</div>
                         </a>
                     </li>
                     <li class="menu-item ">
                         <a href="/Admin/Students" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <i class="menu-icon tf-icons bx bx-crown"></i>
                             <div data-i18n="Analytics">Quản lý sinh viên</div>
                         </a>
                     </li>
                     <li class="menu-item ">
-                        <a href="/Admin/Rules/Index" class="menu-link">
+                        <a href="/Admin/Rules" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Quản lý nội quy</div>
                         </a>
                     </li>
                     <li class="menu-item ">
-                        <a href="/Admin/Violations/Index" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <a href="/Admin/Violations" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-detail"></i>
                             <div data-i18n="Analytics">Quản lý vi phạm</div>
                         </a>
                     </li>
@@ -172,12 +185,12 @@
                         </a>
                     </li>
                     <li class="menu-item ">
-                        <a href="/Admin/Contracts" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Quản lý hợp đồng</div>
+                        <a href="/Admin/RoomAssignments" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-detail"></i>
+                            <div data-i18n="Analytics">Quản lý phân phòng</div>
                         </a>
                     </li>
-                   @*  <!-- Layouts -->
+                    @*  <!-- Layouts -->
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-layout"></i>
@@ -594,9 +607,6 @@
         <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
-
-   
-
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="~/admin/assets/vendor/libs/jquery/jquery.js"></script>

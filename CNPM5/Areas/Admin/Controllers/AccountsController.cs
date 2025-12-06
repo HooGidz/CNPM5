@@ -47,7 +47,9 @@ namespace CNPM5.Areas.Admin.Controllers
         // GET: Admin/Accounts/Create
         public IActionResult Create()
         {
+
             ViewData["RoleId"] = new SelectList(_context.TblRoles, "RoleId", "RoleName");
+
             return View();
         }
 
@@ -67,6 +69,7 @@ namespace CNPM5.Areas.Admin.Controllers
             }
             
             return View(tblAccount);
+            //return View("Index", await _context.TblAccounts.ToListAsync());
         }
 
         // GET: Admin/Accounts/Edit/5
